@@ -3,6 +3,23 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+        debug {
+            storeFile file("${rootProject.projectDir}/app/kestore/debug-keystore")
+            storePassword properties.getProperty('keystore.password')
+            keyAlias 'debugAndroid'
+            keyPassword properties.getProperty('keystore.password')
+        }
+        release {
+            storeFile file("${rootProject.projectDir}/app/kestore/release-keystore")
+            storePassword properties.getProperty('keystore.password')
+            keyAlias 'releaseAndroid'
+            keyPassword properties.getProperty('keystore.password')
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -17,8 +34,13 @@ android {
     }
 
     buildTypes {
+        debug{
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
