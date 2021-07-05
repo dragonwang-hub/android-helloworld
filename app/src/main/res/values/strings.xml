@@ -1,6 +1,13 @@
 <resources>
-    <string name="app_name">linear_layout</string>
+    <string name="app_name">frame_layout</string>
     <string name="button1">button1</string>
     <string name="button2">button2</string>
     <string name="bigButton">BigButton</string>
+    <string name="androidPractice">Android Practice</string>
+    <string name="button3">button3</string>
+    <string name="button4">button4</string>
+    <string name="button5">button5</string>
+    <string name="button6">button6</string>
+    <string name="button7">button7</string>
+    <string name="button8">button8</string>
 </resources>

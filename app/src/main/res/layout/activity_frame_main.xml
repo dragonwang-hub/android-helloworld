@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:height="@dimen/constant_40dp"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/constant_20dp"
+        android:paddingEnd="@dimen/constant_20dp"
+        android:text="@string/androidPractice"
+        android:textColor="@android:color/holo_red_light"
+        android:textStyle="bold"
+        android:textSize="@dimen/constant_20dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/constant_80dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/constant_20dp"
+                android:backgroundTint="@color/teal_700"
+                android:text="@string/button1" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/constant_20dp"
+                android:backgroundTint="@color/teal_700"
+                android:text="@string/button2" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/constant_20dp"
+                android:backgroundTint="@color/teal_700"
+                android:text="@string/button3" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/constant_20dp"
+                android:backgroundTint="@color/teal_700"
+                android:text="@string/button4" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/constant_20dp"
+                android:backgroundTint="@color/teal_700"
+                android:text="@string/button5" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/constant_20dp"
+                android:text="@string/button6" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/constant_20dp"
+                android:background="@color/teal_700"
+                android:text="@string/button7" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/constant_20dp"
+                android:backgroundTintMode="@color/teal_700"
+                android:text="@string/button8" />
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
