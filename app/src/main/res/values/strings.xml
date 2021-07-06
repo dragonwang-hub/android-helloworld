@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">frame_layout</string>
+    <string name="app_name">constraint_layout</string>
     <string name="button1">button1</string>
     <string name="button2">button2</string>
     <string name="bigButton">BigButton</string>
@@ -10,4 +10,8 @@
     <string name="button6">button6</string>
     <string name="button7">button7</string>
     <string name="button8">button8</string>
+    <string name="constraint_layout" translatable="false">constraint_layout</string>
+    <string name="hello" translatable="false">Hello</string>
+    <string name="githubLogo" translatable="false">githubLogo</string>
+    <string name="signup" translatable="false">Signup</string>
 </resources>

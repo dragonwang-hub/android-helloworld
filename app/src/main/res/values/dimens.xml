@@ -3,4 +3,6 @@
     <dimen name="constant_20dp">20dp</dimen>
     <dimen name="constant_80dp">80dp</dimen>
     <dimen name="constant_40dp">40dp</dimen>
+    <dimen name="constant_150dp">150dp</dimen>
+    <dimen name="constant_200dp">200dp</dimen>
 </resources>
