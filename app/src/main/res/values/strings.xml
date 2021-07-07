@@ -20,5 +20,7 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="rememberMe">Remember me</string>
-    <string name="forgotPassword">Forgot passowrd</string>
+    <string name="forgotPassword">Forgot passowrd?</string>
+    <string name="orConnectMe">or connect me</string>
+    <string name="signupWithEmail">Sign Up with Email</string>
 </resources>
