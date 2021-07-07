@@ -27,11 +27,12 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/ToConstraintButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/constant_20dp"
                 android:backgroundTint="@color/teal_700"
-                android:text="@string/button1" />
+                android:text="@string/toConstraint" />
 
             <Button
                 android:id="@+id/login"

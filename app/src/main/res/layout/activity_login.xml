@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -23,24 +24,28 @@
             android:layout_width="@dimen/constant_250dp"
             android:layout_height="@dimen/constant_40dp"
             android:hint="@string/username"
+            android:paddingStart="@dimen/constant_10dp"
             android:textColor="#e4e4e4"
             android:textSize="@dimen/constant_12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="@dimen/constant_196dp"
-            />
+            android:background="@drawable/border"
+            tools:ignore="RtlSymmetry" />
         <EditText
             android:id="@+id/password"
             android:layout_width="@dimen/constant_250dp"
             android:layout_height="@dimen/constant_40dp"
             android:hint="@string/password"
+            android:paddingStart="@dimen/constant_10dp"
             android:textColor="#e4e4e4"
             android:textSize="@dimen/constant_12sp"
             app:layout_constraintStart_toStartOf="@+id/username"
             app:layout_constraintEnd_toEndOf="@+id/username"
             app:layout_constraintTop_toBottomOf="@+id/username"
             android:layout_marginTop="@dimen/constant_10dp"
+            android:background="@drawable/border"
             />
         <CheckBox
             android:layout_width="0dp"
@@ -66,7 +71,7 @@
             android:layout_marginTop="@dimen/constant_22_5dp"/>
 
         <Button
-            android:id="@+id/login"
+            android:id="@+id/loginButton"
             android:layout_width="0dp"
             android:layout_height="@dimen/constant_40dp"
             android:text="@string/login"
@@ -76,7 +81,8 @@
             app:layout_constraintEnd_toEndOf="@id/username"
             app:layout_constraintTop_toBottomOf="@id/forgotPassword"
             android:layout_marginTop="@dimen/constant_22_5dp"
-            android:background="#1f4ba5"
+            android:backgroundTint="#1f4ba5"
+            android:background="@drawable/button_bg_rounded_corners"
             />
 
         <TextView
@@ -86,7 +92,7 @@
             android:text="@string/orConnectMe"
             app:layout_constraintStart_toStartOf="@id/username"
             app:layout_constraintEnd_toEndOf="@id/username"
-            app:layout_constraintTop_toBottomOf="@id/login"
+            app:layout_constraintTop_toBottomOf="@id/loginButton"
             android:layout_marginTop="@dimen/constant_26_5dp"
             />
 
@@ -121,11 +127,8 @@
             app:layout_constraintEnd_toEndOf="@id/username"
             app:layout_constraintTop_toBottomOf="@id/facebook"
             android:layout_marginTop="@dimen/constant_88_5dp"
-            android:background="@drawable/border"
+            android:background="@drawable/button_bg_rounded_corners"
             />
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
