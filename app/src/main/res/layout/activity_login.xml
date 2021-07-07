@@ -65,6 +65,66 @@
             app:layout_constraintTop_toBottomOf="@+id/password"
             android:layout_marginTop="@dimen/constant_22_5dp"/>
 
+        <Button
+            android:id="@+id/login"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/constant_40dp"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toStartOf="@id/username"
+            app:layout_constraintEnd_toEndOf="@id/username"
+            app:layout_constraintTop_toBottomOf="@id/forgotPassword"
+            android:layout_marginTop="@dimen/constant_22_5dp"
+            android:background="#1f4ba5"
+            />
+
+        <TextView
+            android:id="@+id/orConnectMe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/orConnectMe"
+            app:layout_constraintStart_toStartOf="@id/username"
+            app:layout_constraintEnd_toEndOf="@id/username"
+            app:layout_constraintTop_toBottomOf="@id/login"
+            android:layout_marginTop="@dimen/constant_26_5dp"
+            />
+
+        <ImageView
+            android:id="@+id/facebook"
+            android:layout_width="@dimen/constant_120dp"
+            android:layout_height="@dimen/constant_40dp"
+            android:src="@drawable/fb"
+            app:layout_constraintStart_toStartOf="@id/username"
+            app:layout_constraintTop_toBottomOf="@id/orConnectMe"
+            android:layout_marginTop="@dimen/constant_29_5dp"
+            />
+
+        <ImageView
+            android:id="@+id/tw"
+            android:layout_width="@dimen/constant_120dp"
+            android:layout_height="@dimen/constant_40dp"
+            android:src="@drawable/tw"
+            app:layout_constraintEnd_toEndOf="@id/username"
+            app:layout_constraintTop_toBottomOf="@id/orConnectMe"
+            android:layout_marginTop="@dimen/constant_29_5dp"
+            />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/signupWithEmail"
+            android:textAllCaps="false"
+            android:textColor="#1f4ba5"
+            android:textSize="@dimen/constant_12sp"
+            app:layout_constraintStart_toStartOf="@id/username"
+            app:layout_constraintEnd_toEndOf="@id/username"
+            app:layout_constraintTop_toBottomOf="@id/facebook"
+            android:layout_marginTop="@dimen/constant_88_5dp"
+            android:background="@android:color/transparent"
+            />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
