@@ -14,4 +14,11 @@
     <string name="hello" translatable="false">Hello</string>
     <string name="githubLogo" translatable="false">githubLogo</string>
     <string name="signup" translatable="false">Signup</string>
+    <string name="constraintButton" translatable="false">ToConstraint</string>
+    <string name="login" translatable="false">Login</string>
+    <string name="aware" translatable="false">aware</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="rememberMe">Remember me</string>
+    <string name="forgotPassword">Forgot passowrd</string>
 </resources>
