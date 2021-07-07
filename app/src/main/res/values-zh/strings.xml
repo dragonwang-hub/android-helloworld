@@ -10,4 +10,5 @@
     <string name="button6">按钮6</string>
     <string name="button7">按钮7</string>
     <string name="button8">按钮8</string>
+    <string name="username">用户</string>
 </resources>

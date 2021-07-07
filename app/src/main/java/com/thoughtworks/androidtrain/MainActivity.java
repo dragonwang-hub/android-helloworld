@@ -26,6 +26,14 @@ public class MainActivity extends AppCompatActivity {
                 openNewActivity();
             }
         });
+
+        Button loginButton = (Button) findViewById(R.id.login);
+        loginButton.setOnClickListener(v -> openLoginActivity());
+    }
+
+    private void openLoginActivity() {
+        Intent openLoginActivity = new Intent(this, LoginActivity.class);
+        startActivity(openLoginActivity);
     }
 
     private void openNewActivity() {

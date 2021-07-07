@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fill_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/constant_88dp"
+            />
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="@dimen/constant_250dp"
+            android:layout_height="@dimen/constant_40dp"
+            android:hint="@string/username"
+            android:textColor="#e4e4e4"
+            android:textSize="@dimen/constant_12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/constant_196dp"
+            />
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="@dimen/constant_250dp"
+            android:layout_height="@dimen/constant_40dp"
+            android:hint="@string/password"
+            android:textColor="#e4e4e4"
+            android:textSize="@dimen/constant_12sp"
+            app:layout_constraintStart_toStartOf="@+id/username"
+            app:layout_constraintEnd_toEndOf="@+id/username"
+            app:layout_constraintTop_toBottomOf="@+id/username"
+            android:layout_marginTop="@dimen/constant_10dp"
+            />
+        <CheckBox
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/rememberMe"
+            android:textColor="#222222"
+            android:textSize="@dimen/constant_12sp"
+            app:layout_constraintStart_toStartOf="@+id/username"
+            app:layout_constraintTop_toTopOf="@+id/forgotPassword"
+            app:layout_constraintBottom_toBottomOf="@+id/forgotPassword"
+            app:layout_constraintEnd_toStartOf="@+id/forgotPassword"
+            android:layout_marginEnd="@dimen/constant_37_5dp"
+            />
+        <TextView
+            android:id="@+id/forgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgotPassword"
+            android:textColor="#222222"
+            android:textSize="@dimen/constant_12sp"
+            app:layout_constraintEnd_toEndOf="@+id/username"
+            app:layout_constraintTop_toBottomOf="@+id/password"
+            android:layout_marginTop="@dimen/constant_22_5dp"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

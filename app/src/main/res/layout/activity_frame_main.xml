@@ -34,11 +34,12 @@
                 android:text="@string/button1" />
 
             <Button
+                android:id="@+id/login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/constant_20dp"
                 android:backgroundTint="@color/teal_700"
-                android:text="@string/button2" />
+                android:text="@string/login" />
 
             <Button
                 android:layout_width="match_parent"
