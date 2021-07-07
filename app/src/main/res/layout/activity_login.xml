@@ -121,7 +121,7 @@
             app:layout_constraintEnd_toEndOf="@id/username"
             app:layout_constraintTop_toBottomOf="@id/facebook"
             android:layout_marginTop="@dimen/constant_88_5dp"
-            android:background="@android:color/transparent"
+            android:background="@drawable/border"
             />
 
 
