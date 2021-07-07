@@ -15,11 +15,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_frame_main);
 
         Log.d(TAG, "MainActivity Creater");
 
-        Button button = (Button) findViewById(R.id.startButton);
+        Button button = (Button) findViewById(R.id.ToConstraintButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,7 +28,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button loginButton = (Button) findViewById(R.id.login);
-        loginButton.setOnClickListener(v -> openLoginActivity());
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLoginActivity();
+            }
+        });
     }
 
     private void openLoginActivity() {

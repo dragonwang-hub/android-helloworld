@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">constraint_layout</string>
+    <string name="app_name">LOGIN</string>
     <string name="button1">button1</string>
     <string name="button2">button2</string>
     <string name="bigButton">BigButton</string>
@@ -22,5 +22,6 @@
     <string name="rememberMe">Remember me</string>
     <string name="forgotPassword">Forgot passowrd?</string>
     <string name="orConnectMe">or connect me</string>
-    <string name="signupWithEmail">Sign Up with Email</string>
+    <string name="signupWithEmail">Sign Up with E-mail</string>
+    <string name="toConstraint">ToConstraint</string>
 </resources>

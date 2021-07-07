@@ -11,9 +11,9 @@
     <dimen name="constant_196dp">196dp</dimen>
     <dimen name="constant_12sp">12sp</dimen>
     <dimen name="constant_120dp">120dp</dimen>
-    <item name="constant_22_5dp" type="dimen" format="float">22.5dp</item>
-    <item name="constant_37_5dp" type="dimen" format="float">37.5dp</item>
-    <item name="constant_26_5dp" type="dimen" format="float">26.5dp</item>
-    <item name="constant_29_5dp" type="dimen" format="float">29.5dp</item>
-    <item name="constant_88_5dp" type="dimen" format="float">88.5dp</item>
+    <dimen name="constant_22_5dp">22.5dp</dimen>
+    <dimen name="constant_37_5dp">37.5dp</dimen>
+    <dimen name="constant_26_5dp">26.5dp</dimen>
+    <dimen name="constant_29_5dp">29.5dp</dimen>
+    <dimen name="constant_88_5dp">88.5dp</dimen>
 </resources>
