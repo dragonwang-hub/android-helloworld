@@ -14,4 +14,5 @@
     <string name="hello" translatable="false">Hello</string>
     <string name="githubLogo" translatable="false">githubLogo</string>
     <string name="signup" translatable="false">Signup</string>
+    <string name="constraintButton" translatable="false">ToConstraint</string>
 </resources>
