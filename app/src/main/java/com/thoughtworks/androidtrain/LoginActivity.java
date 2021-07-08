@@ -1,10 +1,13 @@
 package com.thoughtworks.androidtrain;
 
 import android.app.ActionBar;
+import android.icu.text.CaseMap;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -18,7 +21,6 @@ public class LoginActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
         // Remember that you should never show the action bar if the
         // status bar is hidden, so hide that too if necessary.
-        ActionBar actionBar = getActionBar();
-        if (actionBar!=null) actionBar.hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
     }
 }
