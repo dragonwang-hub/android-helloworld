@@ -24,4 +24,5 @@
     <string name="orConnectMe">or connect me</string>
     <string name="signupWithEmail">Sign Up with E-mail</string>
     <string name="toConstraint">ToConstraint</string>
+    <string name="pick_contact">Pick Contact</string>
 </resources>
