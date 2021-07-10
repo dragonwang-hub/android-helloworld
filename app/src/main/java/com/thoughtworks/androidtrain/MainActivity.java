@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openNewActivity();
+                openConstraintActivity();
             }
         });
 
@@ -34,6 +34,14 @@ public class MainActivity extends AppCompatActivity {
                 openLoginActivity();
             }
         });
+
+        Button pickContact = (Button) findViewById(R.id.pickContact);
+        pickContact.setOnClickListener(v -> pickContactActivity());
+    }
+
+    private void pickContactActivity() {
+        Intent pickContactActivity = new Intent(this,PickContactActivity.class);
+        startActivity(pickContactActivity);
     }
 
     private void openLoginActivity() {
@@ -41,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(openLoginActivity);
     }
 
-    private void openNewActivity() {
+    private void openConstraintActivity() {
         Intent intent = new Intent(this, ConstraintActivity.class);
         startActivity(intent);
     }
