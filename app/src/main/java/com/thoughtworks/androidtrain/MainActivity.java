@@ -25,20 +25,10 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "MainActivity Creater");
 
         Button button = (Button) findViewById(R.id.ToConstraintButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openConstraintActivity();
-            }
-        });
+        button.setOnClickListener(v -> openConstraintActivity());
 
         Button loginButton = (Button) findViewById(R.id.login);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openLoginActivity();
-            }
-        });
+        loginButton.setOnClickListener(v -> openLoginActivity());
 
         Button pickContact = (Button) findViewById(R.id.pickContact);
         pickContact.setOnClickListener(v -> selectContact());
