@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openFragmentActivity() {
-        Intent fragmentActivity = new Intent(this, FragmentDemoActivity.class)
+        Intent fragmentActivity = new Intent(this, FragmentDemoActivity.class);
+        startActivity(fragmentActivity);
     }
 
     private void openLoginActivity() {
