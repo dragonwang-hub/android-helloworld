@@ -1,6 +1,7 @@
 package com.thoughtworks.androidtrain;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -32,11 +33,18 @@ public class MainActivity extends AppCompatActivity {
 
         Button pickContact = (Button) findViewById(R.id.pickContact);
         pickContact.setOnClickListener(v -> selectContact());
+
+        Button btnFragment = (Button) findViewById(R.id.fragment);
+        btnFragment.setOnClickListener(v->openFragmentActivity());
+    }
+
+    private void openFragmentActivity() {
+        Intent fragmentActivity = new Intent(this, FragmentDemoActivity.class)
     }
 
     private void openLoginActivity() {
-        Intent openLoginActivity = new Intent(this, LoginActivity.class);
-        startActivity(openLoginActivity);
+        Intent loginActivity = new Intent(this, LoginActivity.class);
+        startActivity(loginActivity);
     }
 
     private void openConstraintActivity() {

@@ -25,4 +25,7 @@
     <string name="signupWithEmail">Sign Up with E-mail</string>
     <string name="toConstraint">ToConstraint</string>
     <string name="pick_contact">Pick Contact</string>
+    <string name="fragment">Fragment</string>
+    <string name="android">Android</string>
+    <string name="java">Java</string>
 </resources>

@@ -50,11 +50,12 @@
                 android:backgroundTint="@color/teal_700"
                 android:text="@string/pick_contact" />
             <Button
+                android:id="@+id/fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/constant_20dp"
-                android:backgroundTint="@color/teal_700"
-                android:text="@string/button4" />
+                android:backgroundTint="@color/teal_200"
+                android:text="@string/fragment" />
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
