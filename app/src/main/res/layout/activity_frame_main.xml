@@ -13,8 +13,8 @@
         android:paddingEnd="@dimen/constant_20dp"
         android:text="@string/androidPractice"
         android:textColor="@android:color/holo_red_light"
-        android:textStyle="bold"
-        android:textSize="@dimen/constant_20dp"/>
+        android:textSize="@dimen/constant_20dp"
+        android:textStyle="bold" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -49,6 +49,7 @@
                 android:layout_margin="@dimen/constant_20dp"
                 android:backgroundTint="@color/teal_700"
                 android:text="@string/pick_contact" />
+
             <Button
                 android:id="@+id/fragment"
                 android:layout_width="match_parent"
@@ -56,23 +57,29 @@
                 android:layout_margin="@dimen/constant_20dp"
                 android:backgroundTint="@color/teal_200"
                 android:text="@string/fragment" />
+
             <Button
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/constant_20dp"
-                android:backgroundTint="@color/teal_700"
-                android:text="@string/button5" />
+                android:backgroundTint="@color/blue"
+                android:text="@string/recycler_view"
+                android:textColor="@color/white" />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/constant_20dp"
                 android:text="@string/button6" />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/constant_20dp"
                 android:background="@color/teal_700"
                 android:text="@string/button7" />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

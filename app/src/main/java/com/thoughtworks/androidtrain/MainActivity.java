@@ -25,17 +25,20 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(TAG, "MainActivity Creater");
 
-        Button button = (Button) findViewById(R.id.ToConstraintButton);
+        Button button = findViewById(R.id.ToConstraintButton);
         button.setOnClickListener(v -> openConstraintActivity());
 
-        Button loginButton = (Button) findViewById(R.id.login);
+        Button loginButton = findViewById(R.id.login);
         loginButton.setOnClickListener(v -> openLoginActivity());
 
-        Button pickContact = (Button) findViewById(R.id.pickContact);
+        Button pickContact = findViewById(R.id.pickContact);
         pickContact.setOnClickListener(v -> selectContact());
 
-        Button btnFragment = (Button) findViewById(R.id.fragment);
-        btnFragment.setOnClickListener(v->openFragmentActivity());
+        Button btnFragment = findViewById(R.id.fragment);
+        btnFragment.setOnClickListener(v -> openFragmentActivity());
+
+        Button btnRecycler = findViewById(R.id.recyclerView);
+        btnRecycler.setOnClickListener(v -> openRecyclerViewActivity());
     }
 
     private void openFragmentActivity() {
@@ -60,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         Intent pickContact = new Intent(Intent.ACTION_PICK);
         pickContact.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
         if (pickContact.resolveActivity(getPackageManager()) != null) {
-        Log.d(TAG, "Start activity for result.");
-        startActivityForResult(pickContact, REQUEST_SELECT_CONTACT);
+            Log.d(TAG, "Start activity for result.");
+            startActivityForResult(pickContact, REQUEST_SELECT_CONTACT);
         }
     }
 
@@ -73,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             String[] params = new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER};
             Cursor cursor = getContentResolver().query(data.getData(), params, null, null, null);
 
-            if (cursor != null && cursor.moveToFirst()){
+            if (cursor != null && cursor.moveToFirst()) {
                 String contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
                 String phoneNumber = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                 cursor.close();
@@ -83,5 +86,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Invalid select, Please check it.", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+
+    private void openRecyclerViewActivity() {
+        Intent fragmentActivity = new Intent(this, RecyclerViewActivity.class);
+        startActivity(fragmentActivity);
     }
 }
