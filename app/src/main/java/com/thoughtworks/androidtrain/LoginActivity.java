@@ -1,7 +1,5 @@
 package com.thoughtworks.androidtrain;
 
-import android.app.ActionBar;
-import android.icu.text.CaseMap;
 import android.os.Bundle;
 import android.view.View;
 
