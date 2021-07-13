@@ -10,4 +10,5 @@ Branch Introduce
  - constraint-layout : constraint layout
  - login : constraint/frame/scroll/linear layout
  - pick_contact : select contact, implicit start intent
+ - fragment : fragment component
 
