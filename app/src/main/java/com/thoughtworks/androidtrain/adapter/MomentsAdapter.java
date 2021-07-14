@@ -6,12 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.thoughtworks.androidtrain.R;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -22,7 +19,7 @@ public class MomentsAdapter extends RecyclerView.Adapter<MomentsAdapter.MomentsV
     ArrayList<String> moments;
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MomentsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater from = LayoutInflater.from(context);
 
@@ -34,10 +31,9 @@ public class MomentsAdapter extends RecyclerView.Adapter<MomentsAdapter.MomentsV
 
     @Override
     public void onBindViewHolder(MomentsAdapter.MomentsViewHolder holder, int position) {
-        MomentsViewHolder momentsViewHolder = (MomentsViewHolder) holder;
 
         // TODO set text as `position`
-        momentsViewHolder.name.setText("xxxx");
+        holder.name.setText("xxxx");
     }
 
     @Override
