@@ -13,3 +13,4 @@ Branch Introduce
  - fragment : fragment component
  - lifecycle : activity lifecycle login
  - recyclerview : recycler view/ adapter / Gson / JsonUtil
+ - viewtype : footer view / multiple view type on the recyclerview
