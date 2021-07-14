@@ -1,6 +1,7 @@
 package com.thoughtworks.androidtrain.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,30 +17,58 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class MomentsAdapter extends RecyclerView.Adapter<MomentsAdapter.MomentsViewHolder> {
+public class MomentsAdapter extends RecyclerView.Adapter {
 
-    private List<Tweet> moments = new ArrayList<>();
+    private static final String TAG = "MomentsAdapter";
+
+    private final List<Tweet> moments = new ArrayList<>();
+
+    private final int TYPE_MOMENT = 0;
+    private final int TYPE_FOOTER = 1;
+
+    private int footerCount = 1;
 
     @Override
-    public MomentsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater from = LayoutInflater.from(context);
-
-        // item activity
-        View momentView = from.inflate(R.layout.moments_itew_view, parent, false);
-
-        return new MomentsViewHolder(momentView);
+    public int getItemViewType(int position) {
+        int dataItemCount = moments.size();
+        if (position == dataItemCount) {
+            return TYPE_FOOTER;
+        }
+        return TYPE_MOMENT;
     }
 
     @Override
-    public void onBindViewHolder(MomentsAdapter.MomentsViewHolder holder, int position) {
-        holder.nickName.setText(moments.get(position).getSender().getNick());
-        holder.content.setText(Optional.ofNullable(moments.get(position).getContent()).orElse("Non-Content"));
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater from = LayoutInflater.from(context);
+
+        Log.d(TAG, "viewType:" + viewType);
+        switch (viewType) {
+            case TYPE_MOMENT:
+                // moment item activity
+                View momentView = from.inflate(R.layout.moments_itew_view, parent, false);
+                return new MomentsViewHolder(momentView);
+            case TYPE_FOOTER:
+                // footer item activity
+                View footerView = from.inflate(R.layout.footer_itew_view, parent, false);
+                return new FooterViewHolder(footerView);
+        }
+        return null;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof FooterViewHolder) {
+            ((FooterViewHolder) holder).footer.setText("IT IS END!");
+        } else {
+            ((MomentsViewHolder) holder).nickName.setText(moments.get(position).getSender().getNick());
+            ((MomentsViewHolder) holder).content.setText(Optional.ofNullable(moments.get(position).getContent()).orElse("Non-Content"));
+        }
     }
 
     @Override
     public int getItemCount() {
-        return moments.size();
+        return moments.size() + footerCount;
     }
 
     public void setMoments(List<Tweet> validMoments) {
@@ -55,6 +84,15 @@ public class MomentsAdapter extends RecyclerView.Adapter<MomentsAdapter.MomentsV
             // get component
             this.nickName = viewItem.findViewById(R.id.nickName);
             this.content = viewItem.findViewById(R.id.content);
+        }
+    }
+
+    static class FooterViewHolder extends RecyclerView.ViewHolder {
+        TextView footer;
+
+        public FooterViewHolder(View itemView) {
+            super(itemView);
+            this.footer = itemView.findViewById(R.id.footer);
         }
     }
 }
