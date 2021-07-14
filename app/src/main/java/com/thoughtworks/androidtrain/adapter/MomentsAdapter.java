@@ -9,14 +9,16 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.thoughtworks.androidtrain.R;
+import com.thoughtworks.androidtrain.data.model.Tweet;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 public class MomentsAdapter extends RecyclerView.Adapter<MomentsAdapter.MomentsViewHolder> {
 
-    // TODO String change to obj `moment`
-    ArrayList<String> moments;
+    private List<Tweet> moments = new ArrayList<>();
 
     @Override
     public MomentsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -31,9 +33,8 @@ public class MomentsAdapter extends RecyclerView.Adapter<MomentsAdapter.MomentsV
 
     @Override
     public void onBindViewHolder(MomentsAdapter.MomentsViewHolder holder, int position) {
-
-        // TODO set text as `position`
-        holder.name.setText("xxxx");
+        holder.nickName.setText(moments.get(position).getSender().getNick());
+        holder.content.setText(Optional.ofNullable(moments.get(position).getContent()).orElse("Non-Content"));
     }
 
     @Override
@@ -41,17 +42,19 @@ public class MomentsAdapter extends RecyclerView.Adapter<MomentsAdapter.MomentsV
         return moments.size();
     }
 
-    public void setMoments() {
-        //TODO add the data to list
+    public void setMoments(List<Tweet> validMoments) {
+        moments.addAll(validMoments);
     }
 
     static class MomentsViewHolder extends RecyclerView.ViewHolder {
-        TextView name;
+        TextView nickName;
+        TextView content;
 
         public MomentsViewHolder(View viewItem) {
             super(viewItem);
             // get component
-            this.name = viewItem.findViewById(R.id.nickName);
+            this.nickName = viewItem.findViewById(R.id.nickName);
+            this.content = viewItem.findViewById(R.id.content);
         }
     }
 }

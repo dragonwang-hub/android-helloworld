@@ -11,4 +11,5 @@ Branch Introduce
  - login : constraint/frame/scroll/linear layout
  - pick_contact : select contact, implicit start intent
  - fragment : fragment component
-
+ - lifecycle : activity lifecycle login
+ - recyclerview : recycler view/ adapter / Gson / JsonUtil

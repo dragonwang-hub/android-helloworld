@@ -33,9 +33,4 @@ public class JsonUtil {
         }
         return stringBuilder.toString();
     }
-
-    public static <T> T JsonToObject(String json, Class<T> type) {
-        Gson gson =new Gson();
-        return gson.fromJson(json, type);
-    }
 }
