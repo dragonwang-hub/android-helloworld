@@ -33,4 +33,6 @@
     <string name="recycler_view">Recycler View</string>
     <string name="avatar_demo">It is the avatar demo</string>
     <string name="end">It is end!</string>
+    <string name="timer">timer</string>
+    <string name="start">start</string>
 </resources>

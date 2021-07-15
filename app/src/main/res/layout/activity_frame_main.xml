@@ -68,10 +68,11 @@
                 android:textColor="@color/white" />
 
             <Button
+                android:id="@+id/timer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/constant_20dp"
-                android:text="@string/button6" />
+                android:text="@string/timer" />
 
             <Button
                 android:layout_width="match_parent"

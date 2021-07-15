@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnRecycler = findViewById(R.id.recyclerView);
         btnRecycler.setOnClickListener(v -> openRecyclerViewActivity());
+
+        Button btnTimer = findViewById(R.id.timer);
+        btnTimer.setOnClickListener(v -> openTimerActivity());
     }
 
     private void openFragmentActivity() {
@@ -92,5 +95,11 @@ public class MainActivity extends AppCompatActivity {
     private void openRecyclerViewActivity() {
         Intent fragmentActivity = new Intent(this, RecyclerViewActivity.class);
         startActivity(fragmentActivity);
+    }
+
+
+    private void openTimerActivity() {
+        Intent timerActivity =new Intent(this, TimerActivity.class);
+        startActivity(timerActivity);
     }
 }

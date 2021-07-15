@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".RecyclerViewActivity" />
+        <activity android:name=".TimerActivity" />
     </application>
 
 </manifest>
