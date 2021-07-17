@@ -17,4 +17,5 @@
     <dimen name="constant_29_5dp">29.5dp</dimen>
     <dimen name="constant_88_5dp">88.5dp</dimen>
     <dimen name="constant_30sp">30sp</dimen>
+    <dimen name="constant_60dp">60dp</dimen>
 </resources>

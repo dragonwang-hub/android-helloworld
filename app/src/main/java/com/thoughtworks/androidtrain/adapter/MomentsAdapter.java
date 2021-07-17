@@ -5,10 +5,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.thoughtworks.androidtrain.R;
 import com.thoughtworks.androidtrain.data.model.Tweet;
 
@@ -63,6 +65,8 @@ public class MomentsAdapter extends RecyclerView.Adapter {
         } else {
             ((MomentsViewHolder) holder).nickName.setText(moments.get(position).getSender().getNick());
             ((MomentsViewHolder) holder).content.setText(Optional.ofNullable(moments.get(position).getContent()).orElse("Non-Content"));
+            ImageView avatar = ((MomentsViewHolder) holder).avatar;
+            Glide.with(holder.itemView.getContext()).load(moments.get(position).getSender().getAvatar()).into(avatar);
         }
     }
 
@@ -78,12 +82,14 @@ public class MomentsAdapter extends RecyclerView.Adapter {
     static class MomentsViewHolder extends RecyclerView.ViewHolder {
         TextView nickName;
         TextView content;
+        ImageView avatar;
 
         public MomentsViewHolder(View viewItem) {
             super(viewItem);
             // get component
             this.nickName = viewItem.findViewById(R.id.nickName);
             this.content = viewItem.findViewById(R.id.content);
+            this.avatar = viewItem.findViewById(R.id.avatar);
         }
     }
 
