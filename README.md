@@ -15,3 +15,4 @@ Branch Introduce
  - recyclerview : recycler view/ adapter / Gson / JsonUtil
  - viewtype : footer view / multiple view type on the recyclerview
  - thread-timer : thread / AsyncTask
+ - thread : Glide / How to Fetch image url in the Adapter
