@@ -45,27 +45,27 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
         MomentsAdapter momentsAdapter = new MomentsAdapter();
 
-        ArrayList<Tweet> tweets = getTweetsFromJson();
+        momentsRecyclerView.setAdapter(momentsAdapter);
+        momentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        List<Tweet> tweets = getTweetsFromJson();
         List<Tweet> moments = filterValidTweets(tweets);
         // initial data
         momentsAdapter.setMoments(moments);
-
-        momentsRecyclerView.setAdapter(momentsAdapter);
-        momentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private List<Tweet> filterValidTweets(ArrayList<Tweet> tweets) {
+    private List<Tweet> filterValidTweets(List<Tweet> tweets) {
         return tweets.stream().filter(tweet ->
-            tweet.getError() == null && tweet.getUnknownError() == null
+                tweet.getError() == null && tweet.getUnknownError() == null
         ).collect(Collectors.toList());
     }
 
-    private ArrayList<Tweet> getTweetsFromJson() {
+    private List<Tweet> getTweetsFromJson() {
         String fileName = "tweets.json";
         String json = JsonUtil.getJson(fileName, getApplicationContext());
         Log.i(TAG, json);
 
-        Type arrayListType = new TypeToken<ArrayList<Tweet>>() {
+        Type arrayListType = new TypeToken<List<Tweet>>() {
         }.getType();
         return new Gson().fromJson(json, arrayListType);
     }
