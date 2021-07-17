@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LOGIN</string>
+    <string name="app_name">HELLO ANDROID</string>
     <string name="button1">button1</string>
     <string name="button2">button2</string>
     <string name="bigButton">BigButton</string>
@@ -35,4 +35,7 @@
     <string name="end">It is end!</string>
     <string name="timer">timer</string>
     <string name="start">start</string>
+    <string name="handler">Handler</string>
+    <string name="handler_one">Handler One</string>
+    <string name="handler_two">Handler Two</string>
 </resources>

@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnTimer = findViewById(R.id.timer);
         btnTimer.setOnClickListener(v -> openTimerActivity());
+
+        Button btnHandler = findViewById(R.id.handler);
+        btnHandler.setOnClickListener(v -> openHandlerActivity());
     }
 
     private void openFragmentActivity() {
@@ -101,5 +104,10 @@ public class MainActivity extends AppCompatActivity {
     private void openTimerActivity() {
         Intent timerActivity =new Intent(this, TimerActivity.class);
         startActivity(timerActivity);
+    }
+
+    private void openHandlerActivity() {
+        Intent handlerActivity =new Intent(this, HandlerActivity.class);
+        startActivity(handlerActivity);
     }
 }
