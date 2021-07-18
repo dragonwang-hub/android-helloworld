@@ -83,11 +83,12 @@
                 android:text="@string/handler" />
 
             <Button
+                android:id="@+id/rxjava"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/constant_20dp"
                 android:backgroundTintMode="@color/teal_700"
-                android:text="@string/button8" />
+                android:text="@string/rxjava" />
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

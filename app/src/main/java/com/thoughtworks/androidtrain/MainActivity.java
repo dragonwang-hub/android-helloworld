@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnHandler = findViewById(R.id.handler);
         btnHandler.setOnClickListener(v -> openHandlerActivity());
+
+        Button btnRxJava = findViewById(R.id.rxjava);
+        btnRxJava.setOnClickListener(v -> openRxJavaActivity());
     }
 
     private void openFragmentActivity() {
@@ -102,12 +105,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void openTimerActivity() {
-        Intent timerActivity =new Intent(this, TimerActivity.class);
+        Intent timerActivity = new Intent(this, TimerActivity.class);
         startActivity(timerActivity);
     }
 
     private void openHandlerActivity() {
-        Intent handlerActivity =new Intent(this, HandlerActivity.class);
+        Intent handlerActivity = new Intent(this, HandlerActivity.class);
         startActivity(handlerActivity);
+    }
+
+    private void openRxJavaActivity() {
+        Intent rxJavaActivity = new Intent(this, RxJavaActivity.class);
+        startActivity(rxJavaActivity);
     }
 }
