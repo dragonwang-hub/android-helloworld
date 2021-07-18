@@ -16,4 +16,5 @@ Branch Introduce
  - viewtype : footer view / multiple view type on the recyclerview
  - thread-timer : thread / AsyncTask
  - thread : Glide / How to Fetch image url in the Adapter
- - handler: HandlerThread / runOnUiThread / Looper
+ - handler : HandlerThread / runOnUiThread / Looper
+ - rxjava : Rxjava timer / Observer / Subscriber / Observable / Disposable
