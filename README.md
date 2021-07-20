@@ -18,3 +18,4 @@ Branch Introduce
  - thread : Glide / How to Fetch image url in the Adapter
  - handler : HandlerThread / runOnUiThread / Looper
  - rxjava : Rxjava timer / Observer / Subscriber / Observable / Disposable
+ - sp : share preference utils
