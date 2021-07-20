@@ -39,4 +39,8 @@
     <string name="handler_one">Handler One</string>
     <string name="handler_two">Handler Two</string>
     <string name="rxjava">RxJava</string>
+    <string name="share_preference">Share reference</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="tips">Tips:\nClick "I Agree", Jump Main Page</string>
+    <string name="i_agree">I AGREE</string>
 </resources>

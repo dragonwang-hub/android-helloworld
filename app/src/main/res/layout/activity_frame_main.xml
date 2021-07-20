@@ -89,6 +89,14 @@
                 android:layout_margin="@dimen/constant_20dp"
                 android:backgroundTintMode="@color/teal_700"
                 android:text="@string/rxjava" />
+
+            <Button
+                android:id="@+id/sharePreference"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/constant_20dp"
+                android:backgroundTint="@color/teal_700"
+                android:text="@string/share_preference" />
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

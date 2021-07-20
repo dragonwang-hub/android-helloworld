@@ -1,10 +1,8 @@
-package com.thoughtworks.androidtrain.util;
+package com.thoughtworks.androidtrain.utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
-
-import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.IOException;

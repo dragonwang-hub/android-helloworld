@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnRxJava = findViewById(R.id.rxjava);
         btnRxJava.setOnClickListener(v -> openRxJavaActivity());
+
+        Button btnSP = findViewById(R.id.sharePreference);
+        btnSP.setOnClickListener(v -> openSharePreferenceActivity());
     }
 
     private void openFragmentActivity() {
@@ -117,5 +120,10 @@ public class MainActivity extends AppCompatActivity {
     private void openRxJavaActivity() {
         Intent rxJavaActivity = new Intent(this, RxJavaActivity.class);
         startActivity(rxJavaActivity);
+    }
+
+    private void openSharePreferenceActivity() {
+        Intent spActivity = new Intent(this, SPActivity.class);
+        startActivity(spActivity);
     }
 }

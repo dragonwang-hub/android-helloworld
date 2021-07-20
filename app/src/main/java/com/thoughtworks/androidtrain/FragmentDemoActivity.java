@@ -6,11 +6,10 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.thoughtworks.androidtrain.fragment.AndroidDescription;
 import com.thoughtworks.androidtrain.fragment.JavaDescription;
-import com.thoughtworks.androidtrain.util.FragmentUI;
+import com.thoughtworks.androidtrain.utils.FragmentUI;
 
 public class FragmentDemoActivity extends AppCompatActivity {
 

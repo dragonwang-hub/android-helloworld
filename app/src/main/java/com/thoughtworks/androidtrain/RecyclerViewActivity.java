@@ -12,10 +12,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.androidtrain.adapter.MomentsAdapter;
 import com.thoughtworks.androidtrain.data.model.Tweet;
-import com.thoughtworks.androidtrain.util.JsonUtil;
+import com.thoughtworks.androidtrain.utils.JsonUtil;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
