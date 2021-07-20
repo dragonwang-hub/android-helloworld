@@ -1,18 +1,18 @@
 package com.thoughtworks.androidtrain;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.thoughtworks.androidtrain.constants.SPKeys;
+import com.thoughtworks.androidtrain.utils.SharePreferenceUtil;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -122,8 +122,22 @@ public class MainActivity extends AppCompatActivity {
         startActivity(rxJavaActivity);
     }
 
+    private static boolean userIsKnown;
+
     private void openSharePreferenceActivity() {
-        Intent spActivity = new Intent(this, SPActivity.class);
+        Intent spActivity;
+
+        userIsKnown = getUserIsKnown();
+        Log.i(TAG, String.valueOf(userIsKnown));
+        if (userIsKnown) {
+            spActivity = new Intent(this, SPPromptActivity.class);
+        } else {
+            spActivity = new Intent(this, SPMainActivity.class);
+        }
         startActivity(spActivity);
+    }
+
+    private boolean getUserIsKnown() {
+        return SharePreferenceUtil.readBoolean(this, SPKeys.IS_KNOWN_KEY);
     }
 }
