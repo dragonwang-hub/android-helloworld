@@ -22,7 +22,8 @@ public class SPPromptActivity extends AppCompatActivity {
         btnIAgree = findViewById(R.id.btnIsKnown);
         btnIAgree.setOnClickListener(v -> {
             SharePreferenceUtil.writeBoolean(this, SPKeys.IS_KNOWN_KEY, true);
-            Log.i(TAG,"Write IS_KNOWN_KEY value to true.");
+            Log.i(TAG, "Write IS_KNOWN_KEY value to true.");
+            boolean b = SharePreferenceUtil.readBoolean(this, SPKeys.IS_KNOWN_KEY, false);
             initUI();
         });
     }
