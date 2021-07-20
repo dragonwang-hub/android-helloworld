@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
         userIsKnown = getUserIsKnown();
         Log.i(TAG, String.valueOf(userIsKnown));
-        if (userIsKnown) {
+        if (!userIsKnown) {
             spActivity = new Intent(this, SPPromptActivity.class);
         } else {
             spActivity = new Intent(this, SPMainActivity.class);
@@ -138,6 +138,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean getUserIsKnown() {
-        return SharePreferenceUtil.readBoolean(this, SPKeys.IS_KNOWN_KEY);
+        return SharePreferenceUtil.readBoolean(this, SPKeys.IS_KNOWN_KEY, false);
     }
 }

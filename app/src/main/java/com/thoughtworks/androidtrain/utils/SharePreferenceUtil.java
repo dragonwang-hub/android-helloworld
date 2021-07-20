@@ -13,8 +13,8 @@ public class SharePreferenceUtil {
         editor.apply();
     }
 
-    static public boolean readBoolean(Activity activity, String key) {
+    static public boolean readBoolean(Activity activity, String key, boolean defaultValue) {
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
-        return sharedPref.getBoolean(key, false);
+        return sharedPref.getBoolean(key, defaultValue);
     }
 }
