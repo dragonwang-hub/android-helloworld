@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.androidtrain.adapter.MomentsAdapter;
 import com.thoughtworks.androidtrain.data.model.Tweet;
 import com.thoughtworks.androidtrain.utils.JsonUtil;
+import com.thoughtworks.androidtrain.utils.RawUtil;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -60,13 +61,16 @@ public class RecyclerViewActivity extends AppCompatActivity {
     }
 
     private List<Tweet> getTweetsFromJson() {
-        String fileName = "tweets.json";
-        String json = JsonUtil.getJson(fileName, getApplicationContext());
+//        use assets
+//        String fileName = "tweets.json";
+//        String json = JsonUtil.getJson(fileName, getApplicationContext());
+
+//        use raw
+        String json = RawUtil.readFileToString(getApplicationContext(), R.raw.tweets);
         Log.i(TAG, json);
 
         Type arrayListType = new TypeToken<List<Tweet>>() {
         }.getType();
         return new Gson().fromJson(json, arrayListType);
     }
-
 }
