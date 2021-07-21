@@ -11,15 +11,12 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 public class RawUtil {
-
-    private static final String TAG = "RawUtil";
     public static String readFileToString(Context context, @RawRes int rawId) {
         InputStream inputStream = null;
         try {
             Resources res = context.getResources();
             inputStream = res.openRawResource(rawId);
             byte[] bytes = new byte[inputStream.available()];
-            Log.d(TAG, new String(bytes));
             // read the stream to byte[]
             inputStream.read(bytes);
             return new String(bytes, StandardCharsets.UTF_8);

@@ -20,9 +20,16 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class RecyclerViewActivity extends AppCompatActivity {
 
     private static final String TAG = "RecyclerViewActivity";
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +55,14 @@ public class RecyclerViewActivity extends AppCompatActivity {
         momentsRecyclerView.setAdapter(momentsAdapter);
         momentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<Tweet> tweets = getTweetsFromJson();
-        List<Tweet> moments = filterValidTweets(tweets);
-        // initial data
-        momentsAdapter.setMoments(moments);
+        Disposable subscribe = Observable.just(getTweetsFromJson())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> {
+                    Log.i(TAG,"RxJava get file result:" + result);
+                    momentsAdapter.setMoments(filterValidTweets(result));
+                });
+        compositeDisposable.add(subscribe);
     }
 
     private List<Tweet> filterValidTweets(List<Tweet> tweets) {
@@ -72,5 +83,12 @@ public class RecyclerViewActivity extends AppCompatActivity {
         Type arrayListType = new TypeToken<List<Tweet>>() {
         }.getType();
         return new Gson().fromJson(json, arrayListType);
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.i(TAG, "Clear disposable, on destroy step.");
+        compositeDisposable.clear();
+        super.onDestroy();
     }
 }
