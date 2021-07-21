@@ -12,10 +12,11 @@ Branch Introduce
  - pick_contact : select contact, implicit start intent
  - fragment : fragment component
  - lifecycle : activity lifecycle login
- - recyclerview : recycler view/ adapter / Gson / JsonUtil
+ - recyclerview : recycler view/ adapter / Gson / JsonUtil / asset
  - viewtype : footer view / multiple view type on the recyclerview
  - thread-timer : thread / AsyncTask
  - thread : Glide / How to Fetch image url in the Adapter
  - handler : HandlerThread / runOnUiThread / Looper
  - rxjava : Rxjava timer / Observer / Subscriber / Observable / Disposable
  - sp : share preference utils
+ - raw : read file from raw
