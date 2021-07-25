@@ -18,12 +18,12 @@ public class EntityToModel {
 
     static public Comment commentEntityToComment(CommentEntity commentEntity, List<SenderEntity> senderEntityList) {
         SenderEntity senderEntity = senderEntityList.stream().filter(item ->
-                item.id == commentEntity.senderId
+                item.id == commentEntity.getSenderId()
         ).findFirst().orElse(null);
-        return new Comment(commentEntity.content, senderEntityToSender(senderEntity));
+        return new Comment(commentEntity.getContent(), senderEntityToSender(senderEntity));
     }
 
     static public Image imageEntityToImage(ImageEntity imageEntity) {
-        return new Image(imageEntity.url);
+        return new Image(imageEntity.getUrl());
     }
 }

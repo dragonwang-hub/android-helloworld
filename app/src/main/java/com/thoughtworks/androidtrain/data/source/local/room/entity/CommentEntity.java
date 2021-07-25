@@ -17,11 +17,35 @@ public class CommentEntity {
     public long id;
 
     @ColumnInfo(name = "content")
-    public String content;
+    private String content;
 
     @ColumnInfo(name = "sender_id", index = true)
-    public long senderId;
+    private long senderId;
 
     @ColumnInfo(name = "tweet_id", index = true)
-    public long tweetId;
+    private long tweetId;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public long getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(long senderId) {
+        this.senderId = senderId;
+    }
+
+    public long getTweetId() {
+        return tweetId;
+    }
+
+    public void setTweetId(long tweetId) {
+        this.tweetId = tweetId;
+    }
 }

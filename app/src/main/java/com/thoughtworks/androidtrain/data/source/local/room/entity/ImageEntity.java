@@ -14,8 +14,24 @@ public class ImageEntity {
     public long id;
 
     @ColumnInfo(name = "url")
-    public String url;
+    private String url;
 
     @ColumnInfo(name = "tweet_id")
-    public long tweetId;
+    private long tweetId;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public long getTweetId() {
+        return tweetId;
+    }
+
+    public void setTweetId(long tweetId) {
+        this.tweetId = tweetId;
+    }
 }

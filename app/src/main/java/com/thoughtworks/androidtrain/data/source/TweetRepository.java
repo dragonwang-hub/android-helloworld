@@ -39,19 +39,19 @@ public class TweetRepository implements DataSource {
             tweetEntities.forEach(tweetEntity -> {
                 Tweet tweet = new Tweet();
                 SenderEntity senderEntity = senderEntities.stream()
-                        .filter(entity -> tweetEntity.senderId == entity.id)
+                        .filter(entity -> tweetEntity.getSenderId() == entity.id)
                         .findFirst()
                         .orElse(null);
                 List<Comment> comments = commentEntities.stream()
-                        .filter(entity -> entity.tweetId == tweetEntity.id)
+                        .filter(entity -> entity.getTweetId() == tweetEntity.id)
                         .map(entity -> EntityToModel.commentEntityToComment(entity, senderEntities))
                         .collect(Collectors.toList());
                 List<Image> images = imageEntities.stream()
-                        .filter(entity -> entity.tweetId == tweetEntity.id)
+                        .filter(entity -> entity.getTweetId() == tweetEntity.id)
                         .map(EntityToModel::imageEntityToImage)
                         .collect(Collectors.toList());
 
-                tweet.setContent(tweetEntity.comment);
+                tweet.setContent(tweetEntity.getComment());
                 tweet.setSender(EntityToModel.senderEntityToSender(senderEntity));
                 tweet.setComments(comments);
                 tweet.setImages(images);

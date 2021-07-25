@@ -13,8 +13,24 @@ public class TweetEntity {
     public long id;
 
     @ColumnInfo(name = "sender_id", index = true)
-    public long senderId;
+    private long senderId;
 
     @ColumnInfo(name = "comment")
-    public String comment;
+    private String comment;
+
+    public long getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(long senderId) {
+        this.senderId = senderId;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 }
