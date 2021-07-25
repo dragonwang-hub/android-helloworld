@@ -11,11 +11,11 @@ import androidx.room.PrimaryKey;
 public class ImageEntity {
 
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    public long id;
 
     @ColumnInfo(name = "url")
     public String url;
 
     @ColumnInfo(name = "tweet_id")
-    public int tweetId;
+    public long tweetId;
 }

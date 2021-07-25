@@ -10,10 +10,10 @@ import androidx.room.PrimaryKey;
 )
 public class TweetEntity {
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    public long id;
 
     @ColumnInfo(name = "sender_id", index = true)
-    public int senderId;
+    public long senderId;
 
     @ColumnInfo(name = "comment")
     public String comment;

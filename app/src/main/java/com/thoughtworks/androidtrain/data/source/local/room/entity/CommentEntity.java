@@ -14,14 +14,14 @@ import androidx.room.PrimaryKey;
 )
 public class CommentEntity {
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    public long id;
 
     @ColumnInfo(name = "content")
     public String content;
 
     @ColumnInfo(name = "sender_id", index = true)
-    public int senderId;
+    public long senderId;
 
     @ColumnInfo(name = "tweet_id", index = true)
-    public int tweetId;
+    public long tweetId;
 }

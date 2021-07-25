@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "senders")
 public class SenderEntity {
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    public long id;
 
     @ColumnInfo(name = "username")
     private String userName;
