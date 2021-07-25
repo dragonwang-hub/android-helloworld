@@ -15,7 +15,7 @@ import io.reactivex.rxjava3.core.Single;
 @Dao
 public interface SenderDao {
     @Query("SELECT * FROM senders")
-    Flowable<List<TweetEntity>> getAll();
+    Flowable<List<SenderEntity>> getAll();
 
     @Insert
     Single<Long> insert(SenderEntity senderEntity);
