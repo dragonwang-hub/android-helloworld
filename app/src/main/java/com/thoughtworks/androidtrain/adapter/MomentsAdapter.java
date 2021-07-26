@@ -63,7 +63,7 @@ public class MomentsAdapter extends RecyclerView.Adapter {
         if (holder instanceof FooterViewHolder) {
             ((FooterViewHolder) holder).footer.setText("IT IS END!");
         } else {
-            ((MomentsViewHolder) holder).nickName.setText(moments.get(position).getSender().getNick());
+            ((MomentsViewHolder) holder).nickName.setText(Optional.ofNullable(moments.get(position).getSender().getNick()).orElse("Nick Name Miss"));
             ((MomentsViewHolder) holder).content.setText(Optional.ofNullable(moments.get(position).getContent()).orElse("Non-Content"));
             ImageView avatar = ((MomentsViewHolder) holder).avatar;
             Glide.with(holder.itemView.getContext()).load(moments.get(position).getSender().getAvatar()).into(avatar);

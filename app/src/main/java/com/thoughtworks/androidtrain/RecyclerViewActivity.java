@@ -1,5 +1,6 @@
 package com.thoughtworks.androidtrain;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.androidtrain.adapter.MomentsAdapter;
 import com.thoughtworks.androidtrain.data.model.Tweet;
+import com.thoughtworks.androidtrain.data.source.TweetRepository;
+import com.thoughtworks.androidtrain.data.source.local.room.AppDataBase;
 import com.thoughtworks.androidtrain.utils.JsonUtil;
 import com.thoughtworks.androidtrain.utils.RawUtil;
 
@@ -55,13 +58,23 @@ public class RecyclerViewActivity extends AppCompatActivity {
         momentsRecyclerView.setAdapter(momentsAdapter);
         momentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Disposable subscribe = Observable.just(getTweetsFromJson())
+        TweetRepository tweetRepository = new TweetRepository(getApplicationContext());
+
+        Disposable subscribe = tweetRepository.fetchTweets(R.raw.tweets)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
-                    Log.i(TAG,"RxJava get file result:" + result);
+                    Log.i(TAG, "Fetch tweets result:" + result);
                     momentsAdapter.setMoments(filterValidTweets(result));
                 });
+
+//        Disposable subscribe = Observable.just(getTweetsFromJson())
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(result -> {
+//                    Log.i(TAG,"RxJava get file result:" + result);
+//                    momentsAdapter.setMoments(filterValidTweets(result));
+//                });
         compositeDisposable.add(subscribe);
     }
 

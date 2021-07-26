@@ -2,6 +2,7 @@ package com.thoughtworks.androidtrain.data.source.local.room.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.thoughtworks.androidtrain.data.source.local.room.entity.SenderEntity;
@@ -17,6 +18,6 @@ public interface SenderDao {
     @Query("SELECT * FROM senders")
     Flowable<List<SenderEntity>> getAll();
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     Single<Long> insert(SenderEntity senderEntity);
 }

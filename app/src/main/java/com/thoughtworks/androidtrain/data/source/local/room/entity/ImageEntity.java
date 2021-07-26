@@ -16,7 +16,7 @@ public class ImageEntity {
     @ColumnInfo(name = "url")
     private String url;
 
-    @ColumnInfo(name = "tweet_id")
+    @ColumnInfo(name = "tweet_id", index = true)
     private long tweetId;
 
     public String getUrl() {
