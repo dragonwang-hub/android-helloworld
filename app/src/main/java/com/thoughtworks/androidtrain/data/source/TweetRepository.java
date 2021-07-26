@@ -24,9 +24,6 @@ import com.thoughtworks.androidtrain.data.source.local.room.entity.SenderEntity;
 import com.thoughtworks.androidtrain.data.source.local.room.entity.TweetEntity;
 import com.thoughtworks.androidtrain.utils.RawUtil;
 
-import org.jetbrains.annotations.NotNull;
-import org.reactivestreams.Subscription;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,99 +58,6 @@ public class TweetRepository implements DataSource {
         return getTweets();
     }
 
-    private Flowable<List<Tweet>> getTweets() {
-        List<SenderEntity> senderEntities = appDataBase.senderDao().getAll().blockingFirst();
-        List<CommentEntity> commentEntities = appDataBase.commentDao().getAll().blockingFirst();
-        List<ImageEntity> imageEntities = appDataBase.imageDao().getAll().blockingFirst();
-
-        return appDataBase.tweetDao().getAll().map(tweetEntities -> {
-            List<Tweet> tweets = new ArrayList<>();
-
-            Log.d(TAG, "SenderEntity list is: " + senderEntities.toString());
-            Log.d(TAG, "CommentEntity list is: " + commentEntities.toString());
-            Log.d(TAG, "ImageEntity list is: " + imageEntities.toString());
-
-            tweetEntities.forEach(tweetEntity -> {
-                Tweet tweet = new Tweet();
-                senderEntities.stream()
-                        .filter(entity -> tweetEntity.getSenderId() == entity.id)
-                        .map(EntityToModel::senderEntityToSender)
-                        .findFirst().ifPresent(tweet::setSender);
-
-                List<Comment> comments = commentEntities.stream()
-                        .filter(entity -> entity.getTweetId() == tweetEntity.id)
-                        .map(entity -> EntityToModel.commentEntityToComment(entity, senderEntities))
-                        .collect(Collectors.toList());
-                List<Image> images = imageEntities.stream()
-                        .filter(entity -> entity.getTweetId() == tweetEntity.id)
-                        .map(EntityToModel::imageEntityToImage)
-                        .collect(Collectors.toList());
-
-                tweet.setContent(tweetEntity.getContent());
-                tweet.setComments(comments);
-                tweet.setImages(images);
-                Log.d(TAG, "The tweet is " + tweet.toString());
-                tweets.add(tweet);
-            });
-            return tweets;
-        });
-    }
-
-    private Single<Boolean> updateTweetsToDB(List<Tweet> tweets) {
-        return Single.create(emitter -> {
-            appDataBase.clearAllTables();
-
-            TweetDao tweetDao = appDataBase.tweetDao();
-            SenderDao senderDao = appDataBase.senderDao();
-            CommentDao commentDao = appDataBase.commentDao();
-            ImageDao imageDao = appDataBase.imageDao();
-
-            try {
-                appDataBase.runInTransaction(() -> {
-                    tweets.forEach(tweet -> {
-                        Long senderId = insertToSenderDao(senderDao, tweet.getSender());
-
-                        TweetEntity tweetEntity = new TweetEntity();
-                        tweetEntity.setContent(tweet.getContent());
-                        tweetEntity.setSenderId(senderId);
-                        Long tweetId = tweetDao.insert(tweetEntity).blockingGet();
-
-                        if (tweet.getComments() != null) {
-                            tweet.getComments().forEach(comment -> {
-                                CommentEntity commentEntity = ModelToEntity.commentToCommentEntity(comment);
-                                commentEntity.setContent(comment.getContent());
-                                commentEntity.setTweetId(tweetId);
-                                // set comment sender
-                                Long commentSenderId = insertToSenderDao(senderDao, comment.getSender());
-                                commentEntity.setSenderId(commentSenderId);
-                                commentDao.insert(commentEntity).blockingGet();
-                            });
-                        }
-
-                        if (tweet.getImages() != null) {
-                            tweet.getImages().forEach(image -> {
-                                ImageEntity imageEntity = ModelToEntity.imageToImageEntity(image);
-                                imageEntity.setTweetId(tweetId);
-                                imageDao.insert(imageEntity).blockingGet();
-                            });
-                        }
-                    });
-                });
-            } catch (Exception e) {
-                Log.e(TAG, e.toString());
-                emitter.onError(e);
-                return;
-            }
-            emitter.onSuccess(true);
-        });
-    }
-
-    @NotNull
-    private Long insertToSenderDao(SenderDao senderDao, Sender sender) {
-        SenderEntity senderEntity = ModelToEntity.senderToSenderEntity(sender);
-        return senderDao.insert(senderEntity).blockingGet();
-    }
-
     private List<Tweet> getValidTweetsFromRaw(@RawRes int id) {
         String json = RawUtil.readFileToString(context, id);
         Log.i(TAG, json);
@@ -164,5 +68,113 @@ public class TweetRepository implements DataSource {
         return tweets.stream().filter(tweet ->
                 tweet.getError() == null && tweet.getUnknownError() == null
         ).collect(Collectors.toList());
+    }
+
+    public Single<Boolean> updateTweetsToDB(List<Tweet> tweets) {
+        return Single.create(emitter -> {
+            try {
+                appDataBase.clearAllTables();
+
+                appDataBase.runInTransaction(() -> {
+                    tweets.forEach(tweet -> {
+                        TweetEntity tweetEntity = toRoomTweet(tweet);
+                        tweetEntity.setSenderId(insertRoomSender(tweet.getSender()));
+                        long tweetId = appDataBase.tweetDao().insert(tweetEntity).blockingGet();
+
+                        if (tweet.getImages() != null) {
+                            tweet.getImages().forEach(image -> {
+                                ImageEntity imageEntity = toRoomImage(image, tweetId);
+                                appDataBase.imageDao().insert(imageEntity).blockingGet();
+                            });
+                        }
+
+                        if (tweet.getComments() != null) {
+                            tweet.getComments().forEach(comment -> {
+                                CommentEntity commentEntity = toRoomComment(comment, tweetId, insertRoomSender(comment.getSender()));
+                                appDataBase.commentDao().insert(commentEntity).blockingGet();
+                            });
+                        }
+                    });
+                });
+            } catch (Throwable t) {
+                emitter.onError(t);
+                return;
+            }
+
+            emitter.onSuccess(true);
+        });
+    }
+
+    public Flowable<List<Tweet>> getTweets() {
+        return appDataBase.tweetDao().getAll()
+                .map(tweetEntities -> {
+                    List<SenderEntity> senderEntities = appDataBase.senderDao().getAll().blockingFirst();
+                    List<ImageEntity> imageEntities = appDataBase.imageDao().getAll().blockingFirst();
+                    List<CommentEntity> commentEntities = appDataBase.commentDao().getAll().blockingFirst();
+
+                    List<Tweet> tweets = new ArrayList<>();
+                    for (TweetEntity tweetEntity : tweetEntities) {
+                        Tweet tweet = toTweet(tweetEntity);
+                        senderEntities.stream().filter(senderEntity1 -> senderEntity1.id == tweetEntity.getSenderId()).map(this::toSender).findFirst().ifPresent(tweet::setSender);
+                        tweet.setImages(imageEntities.stream().filter(imageEntity -> imageEntity.getTweetId() == tweetEntity.id).map(imageEntity -> new Image(imageEntity.getUrl())).collect(Collectors.toList()));
+                        tweet.setComments(commentEntities.stream().filter(commentEntity -> commentEntity.getTweetId() == tweetEntity.id).map(commentEntity -> new Comment(commentEntity.getContent(), senderEntities.stream().filter(senderEntity -> senderEntity.id == commentEntity.getSenderId()).map(this::toSender).findFirst().orElse(null))).collect(Collectors.toList()));
+                        tweets.add(tweet);
+                    }
+                    return tweets;
+                });
+    }
+
+    private Tweet toTweet(TweetEntity tweetEntity) {
+        Tweet tweet = new Tweet();
+        tweet.setContent(tweetEntity.getContent());
+
+        return tweet;
+    }
+
+    private Sender toSender(SenderEntity senderEntity) {
+        Sender sender = new Sender();
+        sender.setUserName(senderEntity.getUserName());
+        sender.setNick(senderEntity.getNick());
+        sender.setAvatar(senderEntity.getAvatar());
+
+        return sender;
+    }
+
+    private TweetEntity toRoomTweet(Tweet tweet) {
+        TweetEntity tweetEntity = new TweetEntity();
+        tweetEntity.setContent(tweet.getContent());
+
+        return tweetEntity;
+    }
+
+    private long insertRoomSender(Sender sender) {
+        SenderEntity senderEntity = toRoomSender(sender);
+        return appDataBase.senderDao().insert(senderEntity).blockingGet();
+    }
+
+    private SenderEntity toRoomSender(Sender sender) {
+        SenderEntity senderEntity = new SenderEntity();
+        senderEntity.setUserName(sender.getUserName());
+        senderEntity.setNick(sender.getNick());
+        senderEntity.setAvatar(sender.getAvatar());
+
+        return senderEntity;
+    }
+
+    private ImageEntity toRoomImage(Image image, long tweetId) {
+        ImageEntity imageEntity = new ImageEntity();
+        imageEntity.setTweetId(tweetId);
+        imageEntity.setUrl(image.getUrl());
+
+        return imageEntity;
+    }
+
+    private CommentEntity toRoomComment(Comment comment, long tweetId, long senderId) {
+        CommentEntity commentEntity = new CommentEntity();
+        commentEntity.setTweetId(tweetId);
+        commentEntity.setSenderId(senderId);
+        commentEntity.setContent(comment.getContent());
+
+        return commentEntity;
     }
 }

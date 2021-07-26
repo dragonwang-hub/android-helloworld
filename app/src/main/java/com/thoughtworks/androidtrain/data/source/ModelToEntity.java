@@ -11,6 +11,7 @@ public class ModelToEntity {
 
     static public SenderEntity senderToSenderEntity(Sender sender) {
         SenderEntity senderEntity = new SenderEntity();
+        senderEntity.id = 0;
         senderEntity.setUserName(sender.getUserName());
         senderEntity.setNick(sender.getNick());
         senderEntity.setAvatar(sender.getAvatar());
@@ -19,12 +20,14 @@ public class ModelToEntity {
 
     static public CommentEntity commentToCommentEntity(Comment comment) {
         CommentEntity commentEntity = new CommentEntity();
+        commentEntity.id = 0;
         commentEntity.setContent(comment.getContent());
         return commentEntity;
     }
 
     static public ImageEntity imageToImageEntity(Image image) {
         ImageEntity imageEntity = new ImageEntity();
+        imageEntity.id = 0;
         imageEntity.setUrl(image.getUrl());
         return imageEntity;
     }
