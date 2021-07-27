@@ -28,8 +28,6 @@ import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.core.SingleEmitter;
-import io.reactivex.rxjava3.core.SingleOnSubscribe;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -78,8 +76,10 @@ public class TweetRepository implements DataSource {
             Request request = new Request.Builder().url(TWEETS_URL).build();
 
             try (Response response = okHttpClient.newCall(request).execute()) {
+                Log.i(TAG, "The response is: " + response.body());
                 emitter.onSuccess(Objects.requireNonNull(response.body()).string());
             } catch (Throwable throwable) {
+                Log.e(TAG, throwable.getMessage());
                 emitter.onError(throwable);
             }
         });
