@@ -143,7 +143,7 @@ public class TweetRepository implements DataSource {
     private TweetEntity toRoomTweet(Tweet tweet) {
         TweetEntity tweetEntity = new TweetEntity();
         tweetEntity.setContent(tweet.getContent());
-
+        tweetEntity.id = 0;
         return tweetEntity;
     }
 
@@ -154,6 +154,7 @@ public class TweetRepository implements DataSource {
 
     private SenderEntity toRoomSender(Sender sender) {
         SenderEntity senderEntity = new SenderEntity();
+        senderEntity.id = 0;
         senderEntity.setUserName(sender.getUserName());
         senderEntity.setNick(sender.getNick());
         senderEntity.setAvatar(sender.getAvatar());
@@ -163,6 +164,7 @@ public class TweetRepository implements DataSource {
 
     private ImageEntity toRoomImage(Image image, long tweetId) {
         ImageEntity imageEntity = new ImageEntity();
+        imageEntity.id = 0;
         imageEntity.setTweetId(tweetId);
         imageEntity.setUrl(image.getUrl());
 
@@ -171,6 +173,7 @@ public class TweetRepository implements DataSource {
 
     private CommentEntity toRoomComment(Comment comment, long tweetId, long senderId) {
         CommentEntity commentEntity = new CommentEntity();
+        commentEntity.id = 0;
         commentEntity.setTweetId(tweetId);
         commentEntity.setSenderId(senderId);
         commentEntity.setContent(comment.getContent());
