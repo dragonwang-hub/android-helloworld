@@ -14,10 +14,6 @@ import com.thoughtworks.androidtrain.data.model.Image;
 import com.thoughtworks.androidtrain.data.model.Sender;
 import com.thoughtworks.androidtrain.data.model.Tweet;
 import com.thoughtworks.androidtrain.data.source.local.room.AppDataBase;
-import com.thoughtworks.androidtrain.data.source.local.room.dao.CommentDao;
-import com.thoughtworks.androidtrain.data.source.local.room.dao.ImageDao;
-import com.thoughtworks.androidtrain.data.source.local.room.dao.SenderDao;
-import com.thoughtworks.androidtrain.data.source.local.room.dao.TweetDao;
 import com.thoughtworks.androidtrain.data.source.local.room.entity.CommentEntity;
 import com.thoughtworks.androidtrain.data.source.local.room.entity.ImageEntity;
 import com.thoughtworks.androidtrain.data.source.local.room.entity.SenderEntity;
@@ -27,11 +23,17 @@ import com.thoughtworks.androidtrain.utils.RawUtil;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.core.SingleEmitter;
+import io.reactivex.rxjava3.core.SingleOnSubscribe;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class TweetRepository implements DataSource {
 
@@ -49,14 +51,40 @@ public class TweetRepository implements DataSource {
 
     @Override
     public Flowable<List<Tweet>> fetchTweets(@RawRes int id) {
-        updateTweetsToDB(getValidTweetsFromRaw(id))
+        getTweetsFromInternet()
                 .subscribeOn(Schedulers.io())
                 .subscribe(result -> {
+                    Type arrayListType = new TypeToken<List<Tweet>>() {
+                    }.getType();
+                    List<Tweet> tweets = new Gson().fromJson(result, arrayListType);
+                    List<Tweet> filterTweets = tweets.stream().filter(tweet ->
+                            tweet.getError() == null && tweet.getUnknownError() == null
+                    ).collect(Collectors.toList());
+
+                    updateTweetsToDB(filterTweets).subscribeOn(Schedulers.io()).subscribe();
+
                     Log.i(TAG, "Update tweets to DB, result is " + result);
                 });
 
         return getTweets();
     }
+
+    private OkHttpClient okHttpClient = new OkHttpClient();
+
+    private final String TWEETS_URL = "https://thoughtworks-mobile-2018.herokuapp.com/user/jsmith/tweets";
+
+    private Single<String> getTweetsFromInternet() {
+        return Single.create(emitter -> {
+            Request request = new Request.Builder().url(TWEETS_URL).build();
+
+            try (Response response = okHttpClient.newCall(request).execute()) {
+                emitter.onSuccess(Objects.requireNonNull(response.body()).string());
+            } catch (Throwable throwable) {
+                emitter.onError(throwable);
+            }
+        });
+    }
+
 
     private List<Tweet> getValidTweetsFromRaw(@RawRes int id) {
         String json = RawUtil.readFileToString(context, id);
