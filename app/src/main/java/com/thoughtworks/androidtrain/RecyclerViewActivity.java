@@ -65,16 +65,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
                     Log.i(TAG, "Fetch tweets result:" + result);
-                    momentsAdapter.setMoments(filterValidTweets(result));
+                    momentsAdapter.setMoments(result);
                 });
-
-//        Disposable subscribe = Observable.just(getTweetsFromJson())
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(result -> {
-//                    Log.i(TAG,"RxJava get file result:" + result);
-//                    momentsAdapter.setMoments(filterValidTweets(result));
-//                });
         compositeDisposable.add(subscribe);
     }
 
