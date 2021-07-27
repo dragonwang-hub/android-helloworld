@@ -67,6 +67,7 @@ public class TweetRepository implements DataSource {
         return getTweets();
     }
 
+    // network core code
     private OkHttpClient okHttpClient = new OkHttpClient();
 
     private final String TWEETS_URL = "https://thoughtworks-mobile-2018.herokuapp.com/user/jsmith/tweets";
