@@ -6,7 +6,7 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "images",
-        foreignKeys = @ForeignKey(entity = TweetEntity.class, parentColumns = "id", childColumns = "tweet_id")
+        foreignKeys = @ForeignKey(entity = TweetEntity.class, parentColumns = "id", childColumns = "tweet_id", onDelete = ForeignKey.CASCADE)
 )
 public class ImageEntity {
 

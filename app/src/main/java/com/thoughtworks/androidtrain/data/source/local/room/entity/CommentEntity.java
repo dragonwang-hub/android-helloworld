@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "comments",
         foreignKeys = {
-                @ForeignKey(entity = SenderEntity.class, parentColumns = "id", childColumns = "sender_id"),
-                @ForeignKey(entity = TweetEntity.class, parentColumns = "id", childColumns = "tweet_id")
+                @ForeignKey(entity = SenderEntity.class, parentColumns = "id", childColumns = "sender_id", onDelete = ForeignKey.CASCADE),
+                @ForeignKey(entity = TweetEntity.class, parentColumns = "id", childColumns = "tweet_id", onDelete = ForeignKey.CASCADE)
         }
 )
 public class CommentEntity {

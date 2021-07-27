@@ -6,7 +6,7 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "tweets",
-        foreignKeys = @ForeignKey(entity = SenderEntity.class, parentColumns = "id", childColumns = "sender_id")
+        foreignKeys = @ForeignKey(entity = SenderEntity.class, parentColumns = "id", childColumns = "sender_id", onDelete = ForeignKey.CASCADE)
 )
 public class TweetEntity {
     @PrimaryKey(autoGenerate = true)
