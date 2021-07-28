@@ -41,17 +41,8 @@ public class TweetViewModel extends ViewModel {
 
         Disposable disposable = tweetRepository.fetchTweets(0)
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Consumer<List<Tweet>>() {
-                    @Override
-                    public void accept(List<Tweet> tweets) throws Throwable {
-                        liveData.postValue(tweets);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Throwable {
-                        onError.onError(throwable);
-                    }
-                });
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(tweets -> liveData.postValue(tweets), onError::onError);
         compositeDisposable.add(disposable);
     }
 
