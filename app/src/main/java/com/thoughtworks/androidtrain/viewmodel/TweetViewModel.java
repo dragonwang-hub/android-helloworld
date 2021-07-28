@@ -22,20 +22,24 @@ public class TweetViewModel extends AndroidViewModel {
 
     private static final String TAG = "TweetViewModel";
 
-    @SuppressLint("StaticFieldLeak")
-    private final Context context;
+    private final TweetRepository tweetRepository;
+
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    private MutableLiveData<List<Tweet>> liveData = new MutableLiveData<>();
+
+    public MutableLiveData<List<Tweet>> getLiveData() {
+        return liveData;
+    }
 
     public TweetViewModel(Application application) {
         super(application);
-        this.context = application.getApplicationContext();
+        Context context = application.getApplicationContext();
+        tweetRepository= new TweetRepository(context);
     }
 
-    CompositeDisposable compositeDisposable = new CompositeDisposable();
-
-    public MutableLiveData<List<Tweet>> liveData = new MutableLiveData<>();
 
     public void fetchData(OnError onError) {
-        TweetRepository tweetRepository = new TweetRepository(context);
         Log.i(TAG, "Fetch data from view model.");
         Disposable disposable = tweetRepository.fetchTweets(0)
                 .subscribeOn(Schedulers.io())

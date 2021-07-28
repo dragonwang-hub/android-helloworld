@@ -15,8 +15,6 @@ import com.thoughtworks.androidtrain.viewmodel.TweetViewModel;
 
 import java.util.Objects;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-
 public class RecyclerViewActivity extends AppCompatActivity {
 
     private static final String TAG = "RecyclerViewActivity";
@@ -53,7 +51,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         tweetViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(this.getApplication()))
                 .get(TweetViewModel.class);
 
-        tweetViewModel.liveData.observe(this, tweets -> {
+        tweetViewModel.getLiveData().observe(this, tweets -> {
             Log.i(TAG, "Fetch tweets result:" + tweets);
             momentsAdapter.setMoments(tweets);
         });
