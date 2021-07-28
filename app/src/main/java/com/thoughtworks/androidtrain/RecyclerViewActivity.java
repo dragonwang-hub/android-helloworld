@@ -6,17 +6,13 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.thoughtworks.androidtrain.adapter.MomentsAdapter;
-import com.thoughtworks.androidtrain.data.model.Tweet;
-import com.thoughtworks.androidtrain.viewmodel.OnError;
 import com.thoughtworks.androidtrain.viewmodel.TweetViewModel;
 
-import java.util.List;
 import java.util.Objects;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -24,7 +20,6 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 public class RecyclerViewActivity extends AppCompatActivity {
 
     private static final String TAG = "RecyclerViewActivity";
-    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private TweetViewModel tweetViewModel;
 
     @Override
@@ -55,7 +50,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         momentsRecyclerView.setAdapter(momentsAdapter);
         momentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        tweetViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory())
+        tweetViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(this.getApplication()))
                 .get(TweetViewModel.class);
 
         tweetViewModel.liveData.observe(this, tweets -> {
@@ -67,7 +62,6 @@ public class RecyclerViewActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         Log.i(TAG, "Clear disposable, on destroy step.");
-        compositeDisposable.clear();
         super.onDestroy();
     }
 }
