@@ -58,7 +58,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         momentsRecyclerView.setAdapter(momentsAdapter);
         momentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        TweetRepository tweetRepository = new TweetRepository(getApplicationContext());
+        Twee
 
         Disposable subscribe = tweetRepository.fetchTweets(R.raw.tweets)
                 .subscribeOn(Schedulers.io())
@@ -68,26 +68,6 @@ public class RecyclerViewActivity extends AppCompatActivity {
                     momentsAdapter.setMoments(result);
                 });
         compositeDisposable.add(subscribe);
-    }
-
-    private List<Tweet> filterValidTweets(List<Tweet> tweets) {
-        return tweets.stream().filter(tweet ->
-                tweet.getError() == null && tweet.getUnknownError() == null
-        ).collect(Collectors.toList());
-    }
-
-    private List<Tweet> getTweetsFromJson() {
-//        use assets
-//        String fileName = "tweets.json";
-//        String json = JsonUtil.getJson(fileName, getApplicationContext());
-
-//        use raw
-        String json = RawUtil.readFileToString(getApplicationContext(), R.raw.tweets);
-        Log.i(TAG, json);
-
-        Type arrayListType = new TypeToken<List<Tweet>>() {
-        }.getType();
-        return new Gson().fromJson(json, arrayListType);
     }
 
     @Override
