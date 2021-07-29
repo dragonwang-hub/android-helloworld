@@ -48,10 +48,13 @@ public class RecyclerViewActivity extends AppCompatActivity {
         momentsRecyclerView.setAdapter(momentsAdapter);
         momentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        tweetViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(getApplication()))
+        tweetViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory())
                 .get(TweetViewModel.class);
+        MainApplication application = (MainApplication) getApplication();
+        tweetViewModel.init(application.getSchedulersProvider(), application.getTweetRepository());
 
         tweetViewModel.getLiveData().observe(this, tweets -> {
+
             Log.i(TAG, "Fetch tweets result:" + tweets);
             momentsAdapter.setMoments(tweets);
         });

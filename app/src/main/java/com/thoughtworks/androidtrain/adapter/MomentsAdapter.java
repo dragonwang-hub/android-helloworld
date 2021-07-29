@@ -76,7 +76,9 @@ public class MomentsAdapter extends RecyclerView.Adapter {
     }
 
     public void setMoments(List<Tweet> validMoments) {
+        moments.clear();
         moments.addAll(validMoments);
+        notifyDataSetChanged();
     }
 
     static class MomentsViewHolder extends RecyclerView.ViewHolder {
