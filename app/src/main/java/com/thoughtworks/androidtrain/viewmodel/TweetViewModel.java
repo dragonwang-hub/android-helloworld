@@ -1,13 +1,17 @@
 package com.thoughtworks.androidtrain.viewmodel;
 
+import android.app.Application;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.thoughtworks.androidtrain.MainApplication;
 import com.thoughtworks.androidtrain.data.model.Tweet;
 import com.thoughtworks.androidtrain.data.source.TweetRepository;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -20,25 +24,24 @@ public class TweetViewModel extends AndroidViewModel {
 
     private static final String TAG = "TweetViewModel";
 
-    private final TweetRepository tweetRepository;
-
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private MutableLiveData<List<Tweet>> liveData = new MutableLiveData<>();
+
+    public TweetViewModel(Application application) {
+        super(application);
+    }
 
     public MutableLiveData<List<Tweet>> getLiveData() {
         return liveData;
     }
 
-    public TweetViewModel(MainApplication application) {
-        super(application);
-        tweetRepository = application.getTweetRepository();
-    }
-
 
     public void fetchData(OnError onError) {
         Log.i(TAG, "Fetch data from view model.");
-        Disposable disposable = tweetRepository.fetchTweets()
+        Disposable disposable = ((MainApplication)getApplication())
+                .getTweetRepository()
+                .fetchTweets()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(tweets -> liveData.postValue(tweets), onError::onError);
