@@ -1,13 +1,11 @@
 package com.thoughtworks.androidtrain.viewmodel;
 
-import android.annotation.SuppressLint;
-import android.app.Application;
-import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.thoughtworks.androidtrain.MainApplication;
 import com.thoughtworks.androidtrain.data.model.Tweet;
 import com.thoughtworks.androidtrain.data.source.TweetRepository;
 
@@ -32,16 +30,15 @@ public class TweetViewModel extends AndroidViewModel {
         return liveData;
     }
 
-    public TweetViewModel(Application application) {
+    public TweetViewModel(MainApplication application) {
         super(application);
-        Context context = application.getApplicationContext();
-        tweetRepository= new TweetRepository(context);
+        tweetRepository = application.getTweetRepository();
     }
 
 
     public void fetchData(OnError onError) {
         Log.i(TAG, "Fetch data from view model.");
-        Disposable disposable = tweetRepository.fetchTweets(0)
+        Disposable disposable = tweetRepository.fetchTweets()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(tweets -> liveData.postValue(tweets), onError::onError);

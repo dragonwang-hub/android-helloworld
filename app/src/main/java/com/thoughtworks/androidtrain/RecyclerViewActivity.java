@@ -48,7 +48,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         momentsRecyclerView.setAdapter(momentsAdapter);
         momentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        tweetViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(this.getApplication()))
+        tweetViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory((MainApplication)this.getApplication()))
                 .get(TweetViewModel.class);
 
         tweetViewModel.getLiveData().observe(this, tweets -> {

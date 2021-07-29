@@ -18,6 +18,7 @@ import com.thoughtworks.androidtrain.data.source.local.room.entity.CommentEntity
 import com.thoughtworks.androidtrain.data.source.local.room.entity.ImageEntity;
 import com.thoughtworks.androidtrain.data.source.local.room.entity.SenderEntity;
 import com.thoughtworks.androidtrain.data.source.local.room.entity.TweetEntity;
+import com.thoughtworks.androidtrain.data.source.remote.TweetDataSource;
 import com.thoughtworks.androidtrain.utils.RawUtil;
 
 import java.lang.reflect.Type;
@@ -33,7 +34,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class TweetRepository implements DataSource {
+public class TweetRepository {
 
     private static final String TAG = "TweetRepository";
 
@@ -41,15 +42,17 @@ public class TweetRepository implements DataSource {
 
     private final Context context;
 
-    public TweetRepository(Context context) {
+    private TweetDataSource tweetDataSource;
+
+    public TweetRepository(Context context, TweetDataSource tweetDataSource) {
         this.appDataBase = Room.databaseBuilder(context,
                 AppDataBase.class, "hello_room_db").build();
         this.context = context;
+        this.tweetDataSource = tweetDataSource;
     }
 
-    @Override
-    public Flowable<List<Tweet>> fetchTweets(@RawRes int id) {
-        getTweetsFromInternet()
+    public Flowable<List<Tweet>> fetchTweets() {
+        tweetDataSource.fetchTweetsFromAPI()
                 .subscribeOn(Schedulers.io())
                 .subscribe(result -> {
                     Type arrayListType = new TypeToken<List<Tweet>>() {
