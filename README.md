@@ -23,3 +23,4 @@ Branch Introduce
  - room : roomDB / Rxjava
  - network : config network / Rxjava
  - arch : LiveData / ViewModel
+ - test : unit test / android test / ViewModel test / Espresso test
