@@ -70,8 +70,8 @@ dependencies {
     implementation 'com.scwang.smart:refresh-layout-kernel:2.0.3'      //核心必须依赖
     implementation 'com.scwang.smart:refresh-header-classics:2.0.3'    //经典刷新头
     implementation "androidx.room:room-runtime:$room_version"
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'org.jetbrains:annotations:15.0'
     implementation 'org.jetbrains:annotations:15.0'
     implementation 'com.google.code.gson:gson:2.8.6'
