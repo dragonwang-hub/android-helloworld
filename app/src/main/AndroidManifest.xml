@@ -30,6 +30,7 @@
         <activity android:name=".activities.RxJavaActivity" />
         <activity android:name=".activities.SPPromptActivity" />
         <activity android:name=".activities.SPMainActivity" />
+        <activity android:name=".activities.MomentsActivity" />
     </application>
 
 </manifest>
