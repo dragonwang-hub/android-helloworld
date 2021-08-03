@@ -1,4 +1,4 @@
-package com.thoughtworks.androidtrain;
+package com.thoughtworks.androidtrain.activities;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.thoughtworks.androidtrain.R;
 
 public class HandlerActivity extends AppCompatActivity {
 

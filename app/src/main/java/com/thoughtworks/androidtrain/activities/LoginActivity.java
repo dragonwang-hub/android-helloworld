@@ -1,9 +1,11 @@
-package com.thoughtworks.androidtrain;
+package com.thoughtworks.androidtrain.activities;
 
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.thoughtworks.androidtrain.R;
 
 import java.util.Objects;
 

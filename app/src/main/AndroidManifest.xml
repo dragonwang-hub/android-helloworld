@@ -15,21 +15,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Helloworld">
-        <activity android:name=".ConstraintActivity" />
-        <activity android:name=".FragmentDemoActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".activities.ConstraintActivity" />
+        <activity android:name=".activities.FragmentDemoActivity" />
+        <activity android:name=".activities.LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RecyclerViewActivity" />
-        <activity android:name=".TimerActivity" />
-        <activity android:name=".HandlerActivity" />
-        <activity android:name=".RxJavaActivity" />
-        <activity android:name=".SPPromptActivity" />
-        <activity android:name=".SPMainActivity" />
+        <activity android:name=".activities.RecyclerViewActivity" />
+        <activity android:name=".activities.TimerActivity" />
+        <activity android:name=".activities.HandlerActivity" />
+        <activity android:name=".activities.RxJavaActivity" />
+        <activity android:name=".activities.SPPromptActivity" />
+        <activity android:name=".activities.SPMainActivity" />
     </application>
 
 </manifest>

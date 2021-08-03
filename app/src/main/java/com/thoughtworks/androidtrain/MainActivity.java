@@ -11,6 +11,16 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.thoughtworks.androidtrain.activities.ConstraintActivity;
+import com.thoughtworks.androidtrain.activities.FragmentDemoActivity;
+import com.thoughtworks.androidtrain.activities.HandlerActivity;
+import com.thoughtworks.androidtrain.activities.LoginActivity;
+import com.thoughtworks.androidtrain.activities.MomentsActivity;
+import com.thoughtworks.androidtrain.activities.RecyclerViewActivity;
+import com.thoughtworks.androidtrain.activities.RxJavaActivity;
+import com.thoughtworks.androidtrain.activities.SPMainActivity;
+import com.thoughtworks.androidtrain.activities.SPPromptActivity;
+import com.thoughtworks.androidtrain.activities.TimerActivity;
 import com.thoughtworks.androidtrain.constants.SPKeys;
 import com.thoughtworks.androidtrain.utils.SharePreferenceUtil;
 
@@ -51,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnSP = findViewById(R.id.sharePreference);
         btnSP.setOnClickListener(v -> openSharePreferenceActivity());
+
+        Button btnMoments = findViewById(R.id.moments);
+        btnMoments.setOnClickListener(v -> openMomentsActivity());
+    }
+
+    private void openMomentsActivity() {
+        Intent momentsActivity = new Intent(this, MomentsActivity.class);
+        startActivity(momentsActivity);
     }
 
     private void openFragmentActivity() {

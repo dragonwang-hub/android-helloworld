@@ -1,4 +1,4 @@
-package com.thoughtworks.androidtrain;
+package com.thoughtworks.androidtrain.activities;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.util.Log;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.thoughtworks.androidtrain.R;
 
 import org.jetbrains.annotations.NotNull;
 import org.reactivestreams.Subscriber;

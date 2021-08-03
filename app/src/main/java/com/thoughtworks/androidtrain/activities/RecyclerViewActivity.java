@@ -1,4 +1,4 @@
-package com.thoughtworks.androidtrain;
+package com.thoughtworks.androidtrain.activities;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.thoughtworks.androidtrain.MainApplication;
+import com.thoughtworks.androidtrain.R;
 import com.thoughtworks.androidtrain.adapter.MomentsAdapter;
 import com.thoughtworks.androidtrain.viewmodel.TweetViewModel;
 

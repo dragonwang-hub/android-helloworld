@@ -1,4 +1,4 @@
-package com.thoughtworks.androidtrain;
+package com.thoughtworks.androidtrain.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.thoughtworks.androidtrain.R;
 import com.thoughtworks.androidtrain.constants.SPKeys;
 import com.thoughtworks.androidtrain.utils.SharePreferenceUtil;
 
