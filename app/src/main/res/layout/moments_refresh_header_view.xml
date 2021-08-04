@@ -10,30 +10,44 @@
         android:layout_height="wrap_content"
         android:contentDescription="@null"
         android:src="@mipmap/ic_launcher"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.widget.Space
         android:id="@+id/space_between_profile_image_and_nickname"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginEnd="150dp"
         android:layout_marginBottom="30dp"
         android:background="@android:color/holo_blue_bright"
         app:layout_constraintBottom_toBottomOf="@+id/profile_image"
         app:layout_constraintEnd_toEndOf="@+id/profile_image" />
 
-    <TextView
-        android:id="@+id/sender_nickname"
+    <LinearLayout
+        android:id="@+id/user_profile"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:background="@android:color/holo_blue_bright"
-        android:gravity="center"
-        android:text="Hello World!"
-        android:textColor="@android:color/white"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
         app:layout_constraintStart_toEndOf="@+id/space_between_profile_image_and_nickname"
-        app:layout_constraintTop_toBottomOf="@+id/space_between_profile_image_and_nickname" />
+        app:layout_constraintTop_toBottomOf="@+id/space_between_profile_image_and_nickname">
+
+        <TextView
+            android:id="@+id/user_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:text="Hello World!"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/user_avatar"
+            android:src="@mipmap/ic_launcher" />
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
