@@ -9,10 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.thoughtworks.androidtrain.R;
+import com.thoughtworks.androidtrain.data.model.User;
 
 import org.jetbrains.annotations.NotNull;
 
-public class MomentsRefreshAdapter  extends RecyclerView.Adapter {
+public class MomentsRefreshAdapter extends RecyclerView.Adapter {
+
+    private User userProfile = new User();
+
     @NonNull
     @NotNull
     @Override
@@ -28,6 +32,11 @@ public class MomentsRefreshAdapter  extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return 0;
+    }
+
+    public void setUser(User user) {
+        userProfile = user;
+        notifyDataSetChanged();
     }
 
     static class MomentsViewHolder extends RecyclerView.ViewHolder {
