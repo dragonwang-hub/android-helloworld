@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/constant_20dp">
+
+    <ImageView
+        android:id="@+id/sender_avatar"
+        android:layout_width="@dimen/constant_60dp"
+        android:layout_height="@dimen/constant_60dp"
+        android:src="@drawable/avatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/avatar_demo" />
+
+    <TextView
+        android:id="@+id/sender_nickName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/constant_20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/sender_avatar"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/sender_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/sender_nickName"
+        app:layout_constraintStart_toStartOf="@id/sender_nickName"
+        app:layout_constraintTop_toBottomOf="@id/sender_nickName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
