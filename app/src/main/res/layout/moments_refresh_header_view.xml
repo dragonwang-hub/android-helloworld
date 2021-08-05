@@ -6,8 +6,9 @@
 
     <ImageView
         android:id="@+id/profile_image"
+        android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/constant_200dp"
         android:contentDescription="@null"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,14 +21,13 @@
         android:layout_height="0dp"
         android:layout_marginEnd="150dp"
         android:layout_marginBottom="30dp"
-        android:background="@android:color/holo_blue_bright"
         app:layout_constraintBottom_toBottomOf="@+id/profile_image"
         app:layout_constraintEnd_toEndOf="@+id/profile_image" />
 
     <LinearLayout
         android:id="@+id/user_profile"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintStart_toEndOf="@+id/space_between_profile_image_and_nickname"
         app:layout_constraintTop_toBottomOf="@+id/space_between_profile_image_and_nickname">
@@ -37,14 +37,16 @@
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_gravity="bottom"
+            android:textStyle="bold"
+            android:textSize="@dimen/constant_12sp"
             android:gravity="center"
             android:text="Hello World!"
             android:textColor="@android:color/black" />
 
         <ImageView
             android:id="@+id/user_avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/constant_60dp"
+            android:layout_height="@dimen/constant_60dp"
             android:contentDescription="@string/user_avatar"
             android:src="@mipmap/ic_launcher" />
 

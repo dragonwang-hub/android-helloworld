@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.thoughtworks.androidtrain.R;
 import com.thoughtworks.androidtrain.data.model.Tweet;
 import com.thoughtworks.androidtrain.data.model.User;
@@ -20,7 +21,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class MomentsRefreshAdapter extends RecyclerView.Adapter {
 
@@ -67,6 +67,9 @@ public class MomentsRefreshAdapter extends RecyclerView.Adapter {
             HeaderViewHolder headerViewHolder = (MomentsRefreshAdapter.HeaderViewHolder) holder;
             headerViewHolder.userNickName.setText(userProfile.getNick());
             Glide.with(holder.itemView.getContext()).load(userProfile.getAvatar()).into(headerViewHolder.userAvatar);
+            Log.i(TAG, "User profile image: " + userProfile.getProfileImage());
+            Log.i(TAG, "User getAvatar: " + userProfile.getAvatar());
+
             Glide.with(holder.itemView.getContext()).load(userProfile.getProfileImage()).into(headerViewHolder.userProfileImage);
         } else {
 //            ((MomentsAdapter.MomentsViewHolder) holder).nickName.setText(Optional.ofNullable(moments.get(position).getSender().getNick()).orElse("Nick Name Miss"));

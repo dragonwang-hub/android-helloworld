@@ -24,6 +24,7 @@ public class UserProfileDataSource {
                 Log.i(TAG, "The user profile response is:" + response.body());
                 emitter.onSuccess(Objects.requireNonNull(response.body()).string());
             } catch (Throwable throwable) {
+                Log.i(TAG, "Fetch user info failed, the message is: " + throwable.getMessage());
                 emitter.onError(throwable);
             }
         });

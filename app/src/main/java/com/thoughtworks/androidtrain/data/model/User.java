@@ -1,10 +1,15 @@
 package com.thoughtworks.androidtrain.data.model;
 
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+
 public class User {
 
+    @SerializedName(value = "userName", alternate = "username")
     private String userName;
     private String nick;
     private String avatar;
+    @SerializedName(value = "profileImage", alternate = "profile-image")
     private String profileImage;
 
     public User() {
