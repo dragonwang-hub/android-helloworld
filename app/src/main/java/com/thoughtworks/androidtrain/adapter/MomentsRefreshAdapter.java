@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.thoughtworks.androidtrain.R;
 import com.thoughtworks.androidtrain.data.model.Tweet;
 import com.thoughtworks.androidtrain.data.model.User;
@@ -21,13 +20,15 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class MomentsRefreshAdapter extends RecyclerView.Adapter {
 
     private static final String TAG = "MomentsRefreshAdapter";
 
     private User userProfile = new User();
-    private final List<Tweet> moments = new ArrayList<>();
+
+    private List<Tweet> moments = new ArrayList<>();
 
     private final int TYPE_MOMENT = 0;
     private final int TYPE_USER = 1;
@@ -72,21 +73,27 @@ public class MomentsRefreshAdapter extends RecyclerView.Adapter {
 
             Glide.with(holder.itemView.getContext()).load(userProfile.getProfileImage()).into(headerViewHolder.userProfileImage);
         } else {
-//            ((MomentsAdapter.MomentsViewHolder) holder).nickName.setText(Optional.ofNullable(moments.get(position).getSender().getNick()).orElse("Nick Name Miss"));
-//            ((MomentsAdapter.MomentsViewHolder) holder).content.setText(Optional.ofNullable(moments.get(position).getContent()).orElse("Non-Content"));
-//            ImageView avatar = ((MomentsAdapter.MomentsViewHolder) holder).avatar;
-//            Glide.with(holder.itemView.getContext()).load(moments.get(position).getSender().getAvatar()).into(avatar);
+            MomentsViewHolder momentsViewHolder = (MomentsRefreshAdapter.MomentsViewHolder) holder;
+            momentsViewHolder.nickName.setText(Optional.ofNullable(moments.get(position).getSender().getNick()).orElse("Nick Name Miss"));
+            momentsViewHolder.content.setText(Optional.ofNullable(moments.get(position).getContent()).orElse("Non-Content"));
+            Glide.with(holder.itemView.getContext()).load(moments.get(position).getSender().getAvatar()).into(momentsViewHolder.avatar);
         }
 
     }
 
     @Override
     public int getItemCount() {
-        return userProfileCount;
+        return moments.size();
     }
 
     public void setUser(User user) {
         userProfile = user;
+        notifyDataSetChanged();
+    }
+
+    public void setMoments(List<Tweet> validMoments) {
+        moments.clear();
+        moments.addAll(validMoments);
         notifyDataSetChanged();
     }
 

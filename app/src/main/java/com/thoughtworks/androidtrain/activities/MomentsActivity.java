@@ -3,6 +3,7 @@ package com.thoughtworks.androidtrain.activities;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.thoughtworks.androidtrain.MainApplication;
 import com.thoughtworks.androidtrain.R;
 import com.thoughtworks.androidtrain.adapter.MomentsRefreshAdapter;
+import com.thoughtworks.androidtrain.viewmodel.TweetViewModel;
 import com.thoughtworks.androidtrain.viewmodel.UserViewModel;
 
 import java.util.Objects;
@@ -23,6 +25,7 @@ public class MomentsActivity extends AppCompatActivity {
     MomentsRefreshAdapter momentsRefreshAdapter = new MomentsRefreshAdapter();
 
     private UserViewModel userViewModel;
+    private TweetViewModel tweetViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,13 +35,17 @@ public class MomentsActivity extends AppCompatActivity {
 
         initMomentRecyclerView();
 
-        initUser();
+        initUserViewModel();
+        initTweetViewModel();
 
         getLiveData();
     }
 
     private void getLiveData() {
         userViewModel.getUser();
+        tweetViewModel.fetchData(throwable -> {
+            Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void initMomentRecyclerView() {
@@ -47,7 +54,7 @@ public class MomentsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void initUser() {
+    private void initUserViewModel() {
         userViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory())
                 .get(UserViewModel.class);
         MainApplication application = (MainApplication) getApplication();
@@ -57,6 +64,20 @@ public class MomentsActivity extends AppCompatActivity {
             Log.i(TAG, "User info: " + user.toString());
             momentsRefreshAdapter.setUser(user);
         });
+    }
+
+    private void initTweetViewModel() {
+        tweetViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory())
+                .get(TweetViewModel.class);
+
+        MainApplication application = (MainApplication) getApplication();
+        tweetViewModel.init(application.getSchedulersProvider(), application.getTweetRepository());
+
+        tweetViewModel.getLiveData().observe(this, tweets -> {
+            Log.i(TAG, "Tweets info is: " + tweets.toString());
+            momentsRefreshAdapter.setMoments(tweets);
+        });
+
     }
 
     private void hideStatusBarAndActionBar() {
