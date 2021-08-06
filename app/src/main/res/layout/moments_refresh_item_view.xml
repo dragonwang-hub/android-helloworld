@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/constant_20dp">
-
+    <!--sender.avatar, sender.nick, content, images, comments-->
     <ImageView
         android:id="@+id/sender_avatar"
         android:layout_width="@dimen/constant_60dp"
         android:layout_height="@dimen/constant_60dp"
+        android:contentDescription="@string/avatar_demo"
         android:src="@drawable/avatar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/avatar_demo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/sender_nickName"
@@ -22,7 +22,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/sender_avatar"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/sender_content"
@@ -31,5 +31,23 @@
         app:layout_constraintEnd_toEndOf="@id/sender_nickName"
         app:layout_constraintStart_toStartOf="@id/sender_nickName"
         app:layout_constraintTop_toBottomOf="@id/sender_nickName" />
+
+    <!--    ToDo Nine Grid Images-->
+    <ImageView
+        android:id="@+id/moment_images"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/sender_nickName"
+        app:layout_constraintStart_toStartOf="@id/sender_nickName"
+        app:layout_constraintTop_toBottomOf="@id/sender_content"
+        android:contentDescription="TODO" />
+
+    <ListView
+        android:id="@+id/moment_comments"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/sender_nickName"
+        app:layout_constraintStart_toStartOf="@id/sender_nickName"
+        app:layout_constraintTop_toBottomOf="@id/moment_images" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
