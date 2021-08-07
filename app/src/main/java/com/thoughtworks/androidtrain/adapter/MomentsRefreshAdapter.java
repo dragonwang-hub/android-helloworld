@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,14 +15,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.thoughtworks.androidtrain.R;
+import com.thoughtworks.androidtrain.data.model.Comment;
 import com.thoughtworks.androidtrain.data.model.Tweet;
 import com.thoughtworks.androidtrain.data.model.User;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class MomentsRefreshAdapter extends RecyclerView.Adapter {
 
@@ -29,6 +34,8 @@ public class MomentsRefreshAdapter extends RecyclerView.Adapter {
     private User userProfile = new User();
 
     private List<Tweet> moments = new ArrayList<>();
+
+    private SimpleAdapter commentsAdapter;
 
     private final int TYPE_MOMENT = 0;
     private final int TYPE_USER = 1;
@@ -77,8 +84,26 @@ public class MomentsRefreshAdapter extends RecyclerView.Adapter {
             momentsViewHolder.nickName.setText(Optional.ofNullable(moments.get(position).getSender().getNick()).orElse("Nick Name Miss"));
             momentsViewHolder.content.setText(Optional.ofNullable(moments.get(position).getContent()).orElse("Non-Content"));
             Glide.with(holder.itemView.getContext()).load(moments.get(position).getSender().getAvatar()).into(momentsViewHolder.avatar);
+
+            List<Comment> comments = moments.get(position).getComments();
+            SimpleAdapter commentAdapter = getSimpleAdapter(comments, momentsViewHolder.itemView.getContext());
+
+            momentsViewHolder.comments.setAdapter(commentAdapter);
         }
 
+    }
+
+    @NotNull
+    private SimpleAdapter getSimpleAdapter(List<Comment> comments, Context context) {
+        List<HashMap<String, Object>> commentsData = comments.stream().map(comment -> {
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("comment_sender", comment.getSender().getNick());
+            map.put("comment_content", comment.getContent());
+            return map;
+        }).collect(Collectors.toList());
+
+        return new SimpleAdapter(context, commentsData, R.layout.moment_comments_item,
+                new String[]{"comment_sender", "comment_content"}, new int[]{R.id.comment_sender, R.id.comment_content});
     }
 
     @Override
@@ -97,10 +122,16 @@ public class MomentsRefreshAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
+    public void setCommentsAdapter(SimpleAdapter simpleAdapter) {
+        this.commentsAdapter = simpleAdapter;
+        notifyDataSetChanged();
+    }
+
     static class MomentsViewHolder extends RecyclerView.ViewHolder {
         TextView nickName;
         TextView content;
         ImageView avatar;
+        ListView comments;
 
         public MomentsViewHolder(View viewItem) {
             super(viewItem);
@@ -108,6 +139,7 @@ public class MomentsRefreshAdapter extends RecyclerView.Adapter {
             this.nickName = viewItem.findViewById(R.id.sender_nickName);
             this.content = viewItem.findViewById(R.id.sender_content);
             this.avatar = viewItem.findViewById(R.id.sender_avatar);
+            this.comments = viewItem.findViewById(R.id.moment_comments);
         }
     }
 
