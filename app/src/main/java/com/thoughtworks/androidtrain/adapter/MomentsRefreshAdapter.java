@@ -80,12 +80,13 @@ public class MomentsRefreshAdapter extends RecyclerView.Adapter {
 
             Glide.with(holder.itemView.getContext()).load(userProfile.getProfileImage()).into(headerViewHolder.userProfileImage);
         } else {
+            int momentPosition = position - 1;
             MomentsViewHolder momentsViewHolder = (MomentsRefreshAdapter.MomentsViewHolder) holder;
-            momentsViewHolder.nickName.setText(Optional.ofNullable(moments.get(position).getSender().getNick()).orElse("Nick Name Miss"));
-            momentsViewHolder.content.setText(Optional.ofNullable(moments.get(position).getContent()).orElse("Non-Content"));
-            Glide.with(holder.itemView.getContext()).load(moments.get(position).getSender().getAvatar()).into(momentsViewHolder.avatar);
+            momentsViewHolder.nickName.setText(Optional.ofNullable(moments.get(momentPosition).getSender().getNick()).orElse("Nick Name Miss"));
+            momentsViewHolder.content.setText(Optional.ofNullable(moments.get(momentPosition).getContent()).orElse("Non-Content"));
+            Glide.with(holder.itemView.getContext()).load(moments.get(momentPosition).getSender().getAvatar()).into(momentsViewHolder.avatar);
 
-            List<Comment> comments = moments.get(position).getComments();
+            List<Comment> comments = moments.get(momentPosition).getComments();
             SimpleAdapter commentAdapter = getSimpleAdapter(comments, momentsViewHolder.itemView.getContext());
 
             momentsViewHolder.comments.setAdapter(commentAdapter);
@@ -108,7 +109,7 @@ public class MomentsRefreshAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return moments.size();
+        return moments.size() + userProfileCount;
     }
 
     public void setUser(User user) {
