@@ -96,13 +96,16 @@ public class MomentsRefreshAdapter extends RecyclerView.Adapter {
 
     @NotNull
     private SimpleAdapter getSimpleAdapter(List<Comment> comments, Context context) {
-        List<HashMap<String, Object>> commentsData = comments.stream().map(comment -> {
-            HashMap<String, Object> map = new HashMap<>();
+
+        List<HashMap<String, String>> commentsData = new ArrayList<>();
+        comments.forEach(comment -> {
+            Log.i(TAG, "Comment is: " + comment.toString());
+            HashMap<String, String> map = new HashMap<>();
             map.put("comment_sender", comment.getSender().getNick());
             map.put("comment_content", comment.getContent());
-            return map;
-        }).collect(Collectors.toList());
-
+            commentsData.add(map);
+        });
+        Log.i(TAG, "commentsData is: " + commentsData.size());
         return new SimpleAdapter(context, commentsData, R.layout.moment_comments_item,
                 new String[]{"comment_sender", "comment_content"}, new int[]{R.id.comment_sender, R.id.comment_content});
     }

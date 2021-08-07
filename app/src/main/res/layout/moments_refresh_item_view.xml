@@ -45,7 +45,7 @@
     <ListView
         android:id="@+id/moment_comments"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/constant_40dp"
         app:layout_constraintEnd_toEndOf="@id/sender_nickName"
         app:layout_constraintStart_toStartOf="@id/sender_nickName"
         app:layout_constraintTop_toBottomOf="@id/moment_images" />

@@ -1,5 +1,7 @@
 package com.thoughtworks.androidtrain.data.model;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Comment {
     private String content;
     private Sender sender;
@@ -25,5 +27,13 @@ public class Comment {
     public Comment setSender(Sender sender) {
         this.sender = sender;
         return this;
+    }
+
+    @Override
+    public @NotNull String toString() {
+        return "Comment{" +
+                "content='" + content + '\'' +
+                ", sender=" + sender.getNick() +
+                '}';
     }
 }
