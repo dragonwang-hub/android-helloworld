@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -34,8 +35,6 @@ public class MomentsRefreshAdapter extends RecyclerView.Adapter {
     private User userProfile = new User();
 
     private List<Tweet> moments = new ArrayList<>();
-
-    private SimpleAdapter commentsAdapter;
 
     private final int TYPE_MOMENT = 0;
     private final int TYPE_USER = 1;
@@ -88,7 +87,6 @@ public class MomentsRefreshAdapter extends RecyclerView.Adapter {
 
             List<Comment> comments = moments.get(momentPosition).getComments();
             SimpleAdapter commentAdapter = getSimpleAdapter(comments, momentsViewHolder.itemView.getContext());
-
             momentsViewHolder.comments.setAdapter(commentAdapter);
         }
 
@@ -126,16 +124,12 @@ public class MomentsRefreshAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    public void setCommentsAdapter(SimpleAdapter simpleAdapter) {
-        this.commentsAdapter = simpleAdapter;
-        notifyDataSetChanged();
-    }
-
     static class MomentsViewHolder extends RecyclerView.ViewHolder {
         TextView nickName;
         TextView content;
         ImageView avatar;
         ListView comments;
+        GridView images;
 
         public MomentsViewHolder(View viewItem) {
             super(viewItem);
@@ -144,6 +138,7 @@ public class MomentsRefreshAdapter extends RecyclerView.Adapter {
             this.content = viewItem.findViewById(R.id.sender_content);
             this.avatar = viewItem.findViewById(R.id.sender_avatar);
             this.comments = viewItem.findViewById(R.id.moment_comments);
+            this.images = viewItem.findViewById(R.id.moment_images);
         }
     }
 
