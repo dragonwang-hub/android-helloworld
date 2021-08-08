@@ -1,12 +1,10 @@
 package com.thoughtworks.androidtrain.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -17,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.thoughtworks.androidtrain.R;
+import com.thoughtworks.androidtrain.components.ExpandableHeightGridView;
+import com.thoughtworks.androidtrain.components.ExpandableHeightListView;
 import com.thoughtworks.androidtrain.data.model.Comment;
 import com.thoughtworks.androidtrain.data.model.Image;
 import com.thoughtworks.androidtrain.data.model.Tweet;
@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 public class MomentsRefreshAdapter extends RecyclerView.Adapter {
 
@@ -90,11 +89,13 @@ public class MomentsRefreshAdapter extends RecyclerView.Adapter {
             // images
             List<Image> images = moments.get(momentPosition).getImages();
             SimpleAdapter imagesAdapter = getImagesAdapter(images, momentsViewHolder.itemView.getContext());
+            momentsViewHolder.images.setExpanded(true);
             momentsViewHolder.images.setAdapter(imagesAdapter);
 
             // comments
             List<Comment> comments = moments.get(momentPosition).getComments();
             SimpleAdapter commentsAdapter = getCommentsAdapter(comments, momentsViewHolder.itemView.getContext());
+            momentsViewHolder.comments.setExpanded(true);
             momentsViewHolder.comments.setAdapter(commentsAdapter);
         }
 
@@ -109,9 +110,18 @@ public class MomentsRefreshAdapter extends RecyclerView.Adapter {
             imagesData.add(map);
         });
         Log.i(TAG, "imagesData is: " + imagesData.size());
-        return new SimpleAdapter(context, imagesData, R.layout.moment_image_item,
+        SimpleAdapter imagesAdapter = new SimpleAdapter(context, imagesData, R.layout.moment_image_item,
                 new String[]{"image_item"}, new int[]{R.id.image_item}
         );
+        imagesAdapter.setViewBinder((view, data, textRepresentation) -> {
+            if (view.getId() == R.id.image_item) {
+                ImageView imageView = (ImageView) view;
+                Glide.with(context).load(data).into(imageView);
+                return true;
+            }
+            return false;
+        });
+        return imagesAdapter;
     }
 
     @NotNull
@@ -150,8 +160,8 @@ public class MomentsRefreshAdapter extends RecyclerView.Adapter {
         TextView nickName;
         TextView content;
         ImageView avatar;
-        ListView comments;
-        GridView images;
+        ExpandableHeightListView comments;
+        ExpandableHeightGridView images;
 
         public MomentsViewHolder(View viewItem) {
             super(viewItem);

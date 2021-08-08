@@ -33,14 +33,14 @@
         app:layout_constraintTop_toBottomOf="@id/sender_nickName" />
 
     <!--    ToDo Nine Grid Images-->
-    <GridView
+    <com.thoughtworks.androidtrain.components.ExpandableHeightGridView
         android:id="@+id/moment_images"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/purple_200"
+        android:layout_height="@dimen/constant_200dp"
         android:columnWidth="90dp"
         android:contentDescription="Here are moment iamges"
         android:gravity="center"
+        android:horizontalSpacing="5dp"
         android:numColumns="3"
         android:stretchMode="columnWidth"
         android:verticalSpacing="5dp"
@@ -48,7 +48,7 @@
         app:layout_constraintStart_toStartOf="@id/sender_nickName"
         app:layout_constraintTop_toBottomOf="@id/sender_content" />
 
-    <ListView
+    <com.thoughtworks.androidtrain.components.ExpandableHeightListView
         android:id="@+id/moment_comments"
         android:layout_width="0dp"
         android:layout_height="@dimen/constant_40dp"
