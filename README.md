@@ -24,3 +24,4 @@ Branch Introduce
  - network : config network / Rxjava
  - arch : LiveData / ViewModel
  - test : unit test / android test / ViewModel test / Espresso test
+ - moments : practice / Custom Component / SimpleAdapter / GridView / ListView
