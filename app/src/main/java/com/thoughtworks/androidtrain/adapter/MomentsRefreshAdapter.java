@@ -1,6 +1,7 @@
 package com.thoughtworks.androidtrain.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.thoughtworks.androidtrain.R;
 import com.thoughtworks.androidtrain.data.model.Comment;
+import com.thoughtworks.androidtrain.data.model.Image;
 import com.thoughtworks.androidtrain.data.model.Tweet;
 import com.thoughtworks.androidtrain.data.model.User;
 
@@ -26,7 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.concurrent.ExecutionException;
 
 public class MomentsRefreshAdapter extends RecyclerView.Adapter {
 
@@ -85,15 +87,35 @@ public class MomentsRefreshAdapter extends RecyclerView.Adapter {
             momentsViewHolder.content.setText(Optional.ofNullable(moments.get(momentPosition).getContent()).orElse("Non-Content"));
             Glide.with(holder.itemView.getContext()).load(moments.get(momentPosition).getSender().getAvatar()).into(momentsViewHolder.avatar);
 
+            // images
+            List<Image> images = moments.get(momentPosition).getImages();
+            SimpleAdapter imagesAdapter = getImagesAdapter(images, momentsViewHolder.itemView.getContext());
+            momentsViewHolder.images.setAdapter(imagesAdapter);
+
+            // comments
             List<Comment> comments = moments.get(momentPosition).getComments();
-            SimpleAdapter commentAdapter = getSimpleAdapter(comments, momentsViewHolder.itemView.getContext());
-            momentsViewHolder.comments.setAdapter(commentAdapter);
+            SimpleAdapter commentsAdapter = getCommentsAdapter(comments, momentsViewHolder.itemView.getContext());
+            momentsViewHolder.comments.setAdapter(commentsAdapter);
         }
 
     }
 
+    @NonNull
+    private SimpleAdapter getImagesAdapter(List<Image> images, Context context) {
+        List<HashMap<String, Object>> imagesData = new ArrayList<>();
+        images.forEach(image -> {
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("image_item", image.getUrl());
+            imagesData.add(map);
+        });
+        Log.i(TAG, "imagesData is: " + imagesData.size());
+        return new SimpleAdapter(context, imagesData, R.layout.moment_image_item,
+                new String[]{"image_item"}, new int[]{R.id.image_item}
+        );
+    }
+
     @NotNull
-    private SimpleAdapter getSimpleAdapter(List<Comment> comments, Context context) {
+    private SimpleAdapter getCommentsAdapter(List<Comment> comments, Context context) {
 
         List<HashMap<String, String>> commentsData = new ArrayList<>();
         comments.forEach(comment -> {
